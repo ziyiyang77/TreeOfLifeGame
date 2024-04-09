@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (DialogueManager.GetInstance().dialogueIsPlaying)
+        if (DialogueManager.GetInstance() && DialogueManager.GetInstance().dialogueIsPlaying)
         {
             Vector3 vec = Vector3.zero;
             rb.velocity = vec * speed;
