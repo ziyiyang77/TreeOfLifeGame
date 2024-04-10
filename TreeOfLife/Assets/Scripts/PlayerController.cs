@@ -10,10 +10,12 @@ public class PlayerController : MonoBehaviour
     public LayerMask terrainLayer;
     public Rigidbody rb;
     public SpriteRenderer sr;
+    private Animator animator; // Reference to the Animator component
 
     void Start()
     {
         rb = gameObject.GetComponent<Rigidbody>();
+        animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
         {
             Vector3 vec = Vector3.zero;
             rb.velocity = vec * speed;
+            animator.SetBool("isWalking", false); // Ensure the walking animation stops during dialogue
             return;
         }
 
@@ -30,7 +33,7 @@ public class PlayerController : MonoBehaviour
         castPos.y += 1;
         if (Physics.Raycast(castPos, -transform.up, out hit, Mathf.Infinity, terrainLayer))
         {
-            if(hit.collider != null)
+            if (hit.collider != null)
             {
                 Vector3 movPos = transform.position;
                 movPos.y = hit.point.y + groudDist;
@@ -43,15 +46,18 @@ public class PlayerController : MonoBehaviour
         Vector3 moveDir = new Vector3(x, 0, y);
         rb.velocity = moveDir * speed;
 
+        // Determine if the player is walking based on movement input
+        bool isWalking = moveDir.magnitude > 0;
+        animator.SetBool("isWalking", isWalking); // Update the Animator's isWalking parameter
+
         if (x != 0 && x < 0)
         {
             sr.flipX = true;
         }
-        else if (x != 0 && x > 0) 
+        else if (x != 0 && x > 0)
         {
             sr.flipX = false;
         }
 
     }
-
 }
