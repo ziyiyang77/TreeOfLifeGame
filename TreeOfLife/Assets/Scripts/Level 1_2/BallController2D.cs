@@ -4,13 +4,14 @@ public class BallController2D : MonoBehaviour
 {
     private bool isDragging = false;
     private Vector3 offset;
-    private Transform rodTransform;
+    public Transform rodTransform;
+    public float radius = 1.68f;
 
     private void Start()
     {
         // 获取圆形杆的Transform组件
-        rodTransform = GameObject.Find("center_up").transform;
-        Debug.Log(rodTransform.position);
+     //   rodTransform = GameObject.Find("center_up").transform;
+      //  Debug.Log(rodTransform.position);
     }
 
     private void OnMouseDown()
@@ -38,7 +39,7 @@ public class BallController2D : MonoBehaviour
         // 计算新位置相对于圆形杆中心的向量
         Vector3 direction = newPosition - rodTransform.position;
         // 将方向向量限制在圆形杆半径上
-        direction = direction.normalized * 1.4f;
+        direction = direction.normalized * radius;
         // 限制小球位置在圆形杆的表面上
         newPosition = rodTransform.position + direction;
         return newPosition;
