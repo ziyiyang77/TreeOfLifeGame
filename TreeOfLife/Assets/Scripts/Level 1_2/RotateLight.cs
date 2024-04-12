@@ -6,7 +6,7 @@ public class RotateLight : MonoBehaviour
     private Vector3 offset;
     public Transform rodTransform;
     public float radius=2.53f;//The plate radius is 2.53f
-   
+    public Camera GetCamera;// get the first view camera
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class RotateLight : MonoBehaviour
     private void OnMouseDown()
     {
         // 计算鼠标点击位置和小球中心的偏移量
-        offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+        offset = transform.position - GetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         isDragging = true;
     }
 
@@ -25,7 +25,7 @@ public class RotateLight : MonoBehaviour
         if (isDragging)
         {
             
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) + offset;
+            Vector3 newPosition = GetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) + offset;
           
             newPosition = LimitToRod(newPosition);
             

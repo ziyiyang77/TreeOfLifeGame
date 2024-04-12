@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.13521002, w: 0.99081695}
   m_LocalPosition: {x: -1.4469936, y: -0.7513968, z: 0.044362444}
-  m_LocalScale: {x: 0.33752057, y: 0.21133839, z: 1}
+  m_LocalScale: {x: 0.30939674, y: 0.21133839, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3739063673710240441}
@@ -130,7 +130,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 5.7585335, y: 0.78922296}
+  m_ConnectedAnchor: {x: 5.3500466, y: 0.95430905}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!233 &2871654416450653524
@@ -149,7 +149,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: -2.2566073, y: 0.26685682}
-  m_ConnectedAnchor: {x: 0.40915158, y: -0.2803441}
+  m_ConnectedAnchor: {x: 0.43740642, y: 0.006201837}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -187,7 +187,7 @@ Transform:
   m_GameObject: {fileID: 530922143770440795}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6279936, y: -0.47739673, z: 0.00793278}
+  m_LocalPosition: {x: -0.699, y: -0.49, z: 0.00793278}
   m_LocalScale: {x: 0.12319, y: 0.12319, z: 0.12319}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -288,7 +288,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.029000044, y: -0.00999999}
+  m_ConnectedAnchor: {x: -0.042006373, y: -0.022603273}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -466,7 +466,7 @@ Transform:
   m_GameObject: {fileID: 2808177025971391800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.2541883, y: -0.8588879, z: 0.048490427}
+  m_LocalPosition: {x: -2.196, y: -0.885, z: 0.048490427}
   m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -573,7 +573,7 @@ MonoBehaviour:
   - {x: -0.46381786, y: -1.9467101, z: 0}
   m_ShapePathHash: -224875996
   m_Mesh: {fileID: 0}
-  m_InstanceId: 31004
+  m_InstanceId: 119202
   m_LocalBounds:
     m_Center: {x: -0.008876801, y: -0.004183054, z: 0}
     m_Extent: {x: 1.9425272, y: 1.942527, z: 0}

@@ -2,10 +2,14 @@ using UnityEngine;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    public Camera firstCamera; 
+    public Camera firstCamera;
+
+    public float minRange = 0.0f; // 允许的最小范围
+    public float maxRange = 0.5f; // 允许的最大范围
 
     private Camera mainCamera; 
     private bool isInTriggerZone = false;
+    private int count = 0;
 
 
     void Start()
@@ -33,6 +37,15 @@ public class CameraSwitcher : MonoBehaviour
         }
     }
 
+    bool check( Transform objectToDetect)
+    {
+        float distance = Vector3.Distance(transform.position, objectToDetect.transform.position);
+        if (distance >= minRange && distance <= maxRange)
+        {
+            return true;
+        }
+        return false;
+    }
     void Update()
     {
         if (isInTriggerZone && Input.GetKeyDown(KeyCode.F))
@@ -42,7 +55,30 @@ public class CameraSwitcher : MonoBehaviour
             
             mainCamera.enabled = false;
             Debug.Log("first view");
+
+           GameObject[] gb = GameObject.FindGameObjectsWithTag("Pos");
+            
+
+                foreach (GameObject s in gb)
+                {
+                    CheckRange myScript = s.GetComponent<CheckRange>();
+                if (myScript.flag)
+                    count++;
+                else
+                    count = 0;
+                }
+                if(count==gb.Length)
+               {
+                firstCamera.enabled = false;
+
+                mainCamera.enabled = true;
+                Debug.Log("sucsess !");
+            }
+            
+          
+            
         }
+        
        
 
 

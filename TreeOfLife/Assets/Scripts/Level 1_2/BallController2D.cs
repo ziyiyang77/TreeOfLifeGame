@@ -6,6 +6,7 @@ public class BallController2D : MonoBehaviour
     private Vector3 offset;
     public Transform rodTransform;
     public float radius = 1.68f;
+    public Camera GetCamera;
 
     private void Start()
     {
@@ -17,7 +18,7 @@ public class BallController2D : MonoBehaviour
     private void OnMouseDown()
     {
         // 计算鼠标点击位置和小球中心的偏移量
-        offset = transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+        offset = transform.position - GetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
         isDragging = true;
     }
 
@@ -26,7 +27,7 @@ public class BallController2D : MonoBehaviour
         if (isDragging)
         {
             // 计算拖动后的位置
-            Vector3 newPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) + offset;
+            Vector3 newPosition = GetCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)) + offset;
             // 将位置限制在圆形杆的表面上
             newPosition = LimitToRod(newPosition);
             // 更新小球的位置
