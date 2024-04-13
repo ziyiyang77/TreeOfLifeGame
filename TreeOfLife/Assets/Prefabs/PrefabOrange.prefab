@@ -288,7 +288,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.042006373, y: -0.022603273}
+  m_ConnectedAnchor: {x: 0.021000028, y: 0.008000016}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -313,7 +313,7 @@ FixedJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 2.5557816, y: 0.19581458}
+  m_ConnectedAnchor: {x: 2.555561, y: 0.24332644}
   m_DampingRatio: 0
   m_Frequency: 0
 --- !u!1 &1385081305840621611
@@ -343,7 +343,7 @@ Transform:
   m_GameObject: {fileID: 1385081305840621611}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.6569936, y: -0.46739674, z: 0.007932762}
+  m_LocalPosition: {x: -0.694, y: -0.496, z: 0.007932762}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -392,7 +392,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.997, y: 1.552}
+  m_ConnectedAnchor: {x: 0.9599936, y: 1.5233967}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -538,6 +538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rodTransform: {fileID: 7211858049173522566}
   radius: 1.68
+  GetCamera: {fileID: 0}
 --- !u!114 &3569313269757573841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,7 +574,7 @@ MonoBehaviour:
   - {x: -0.46381786, y: -1.9467101, z: 0}
   m_ShapePathHash: -224875996
   m_Mesh: {fileID: 0}
-  m_InstanceId: 119202
+  m_InstanceId: 34690
   m_LocalBounds:
     m_Center: {x: -0.008876801, y: -0.004183054, z: 0}
     m_Extent: {x: 1.9425272, y: 1.942527, z: 0}
