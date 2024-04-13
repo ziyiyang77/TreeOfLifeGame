@@ -3,8 +3,8 @@
 public class CheckRange: MonoBehaviour
 {
     public GameObject objectToDetect; // 要检测的物体
-    public float minRange = 0.0f; // 允许的最小范围
-    public float maxRange = 0.5f; // 允许的最大范围
+    public float minRange = 0.0f; 
+    public float maxRange = 0.5f; 
     public bool flag = false;
 
     void Update()
