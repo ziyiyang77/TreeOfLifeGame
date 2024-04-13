@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,15 +9,17 @@ public class MusicPuzzleController : MonoBehaviour
     public AudioSource wrongSoundSource;
     private int[][] correctOrders = new int[][]
     {
-        new int[] { 0, 1, 2, 3, 4 },
-        new int[] { 1, 4, 4, 2, 3 },
+        new int[] { 1 },
+        new int[] { 1, 2 },
     };
     private float lastInteractionTime = 0f;
     private CrawSinger crawSinger;
+    public List<Light> pointLights; // Reference to the point lights
 
     void Start()
     {
         crawSinger = FindObjectOfType<CrawSinger>();
+        UpdatePointLights();
     }
 
     public void HandleMerrybellActivated(int activatedMerrybellId)
@@ -43,6 +46,7 @@ public class MusicPuzzleController : MonoBehaviour
             if (i >= currentCorrectOrder.Length || currentMerrybellsOrder[i] != currentCorrectOrder[i])
             {
                 wrongSoundSource.Play();
+                StartCoroutine(FlashLights());
                 ResetPuzzle();
                 return;
             }
@@ -52,6 +56,7 @@ public class MusicPuzzleController : MonoBehaviour
         {
             Debug.Log("Puzzle Solved!");
             AdvanceToNextPuzzle();
+            UpdatePointLights();
         }
     }
 
@@ -65,6 +70,7 @@ public class MusicPuzzleController : MonoBehaviour
         }
         else
         {
+            currentPuzzleIndex++;
             Debug.Log("All puzzles completed.");
         }
     }
@@ -72,5 +78,36 @@ public class MusicPuzzleController : MonoBehaviour
     void ResetPuzzle()
     {
         currentMerrybellsOrder.Clear();
+    }
+
+    void UpdatePointLights()
+    {
+        for (int i = 0; i < pointLights.Count; i++)
+        {
+            if (i < currentPuzzleIndex)
+                pointLights[i].enabled = true;
+            else
+                pointLights[i].enabled = false;
+        }
+    }
+
+    IEnumerator FlashLights()
+    {
+        Color originalColor = pointLights[0].color; // Assuming all lights start with the same color
+
+        foreach (var light in pointLights)
+        {
+            light.color = Color.red;
+            light.enabled = true;
+        }
+
+        yield return new WaitForSeconds(2); // Wait for 2 seconds
+
+        foreach (var light in pointLights)
+        {
+            light.color = originalColor;
+        }
+
+        UpdatePointLights(); // Restore the lighting state based on puzzle progress
     }
 }

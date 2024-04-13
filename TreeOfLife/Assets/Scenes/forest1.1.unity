@@ -494,7 +494,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 100
+  field of view: 45
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -521,7 +521,7 @@ Transform:
   m_GameObject: {fileID: 99487705}
   serializedVersion: 2
   m_LocalRotation: {x: 0.020593435, y: 0, z: 0, w: 0.999788}
-  m_LocalPosition: {x: 32.59, y: 14.261782, z: -8.991519}
+  m_LocalPosition: {x: 32.59, y: 11.551783, z: -30.841518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9030,7 +9030,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 1752172517}
   m_Follow: {fileID: 1752172517}
   m_Lens:
-    FieldOfView: 100
+    FieldOfView: 45
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -9057,7 +9057,7 @@ Transform:
   m_GameObject: {fileID: 1436058542}
   serializedVersion: 2
   m_LocalRotation: {x: 0.020593435, y: 0, z: 0, w: 0.999788}
-  m_LocalPosition: {x: 32.59, y: 14.261782, z: -8.991519}
+  m_LocalPosition: {x: 32.59, y: 11.551783, z: -30.841518}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10879,7 +10879,7 @@ Transform:
   m_GameObject: {fileID: 1752172513}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 32.59, y: 10.85, z: 11}
+  m_LocalPosition: {x: 32.59, y: 10.85, z: 9.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11005,7 +11005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad980451443d70438faac0bc6c235a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 3, z: -10}
+  m_TrackedObjectOffset: {x: 0, y: 0.29, z: -30}
   m_LookaheadTime: 0
   m_LookaheadSmoothing: 0
   m_LookaheadIgnoreY: 0
@@ -11562,7 +11562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6964d7d024067094fa7cef557505e32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: Level 1_1
+  nextSceneName: forest1.2
 --- !u!65 &1971945939
 BoxCollider:
   m_ObjectHideFlags: 0
