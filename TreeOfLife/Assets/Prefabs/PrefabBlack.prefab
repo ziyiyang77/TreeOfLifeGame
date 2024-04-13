@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5744678018666602869}
   - component: {fileID: 5511604623554688742}
-  - component: {fileID: 1679400658635157525}
+  - component: {fileID: 5329346904437299630}
   m_Layer: 0
   m_Name: FixedGameObject
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1080088915844853893}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.31448376, y: 0.79497457, z: 0.049011283}
+  m_LocalPosition: {x: -0.229, y: 0.78, z: 0.049011283}
   m_LocalScale: {x: 0.14, y: 0.14, z: 0.14}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,7 +60,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!233 &1679400658635157525
+--- !u!233 &5329346904437299630
 HingeJoint2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,9 +74,9 @@ HingeJoint2D:
   m_BreakForce: Infinity
   m_BreakTorque: Infinity
   m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 0
-  m_Anchor: {x: 0.57181394, y: -0.15069708}
-  m_ConnectedAnchor: {x: 1.0332431, y: 2.723924}
+  m_AutoConfigureConnectedAnchor: 1
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 1.0544838, y: 2.7270255}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -234,7 +234,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 0
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.5677412, y: -0.12838961}
+  m_ConnectedAnchor: {x: -0.042857345, y: -0.021429315}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -383,7 +383,7 @@ MonoBehaviour:
   - {x: -0.88807213, y: -1.7386389, z: 0}
   m_ShapePathHash: -1153279976
   m_Mesh: {fileID: 0}
-  m_InstanceId: 59334
+  m_InstanceId: 32606
   m_LocalBounds:
     m_Center: {x: -0.01421833, y: 0.002871871, z: 0}
     m_Extent: {x: 1.9646223, y: 1.9646227, z: 0}
