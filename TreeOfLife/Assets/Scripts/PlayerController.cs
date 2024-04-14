@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
-    public float groudDist;
+    private float speed = 10; // This can be set to 0 initially or by other scripts
+    public float groundDist;
 
     public LayerMask terrainLayer;
     public Rigidbody rb;
@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
     }
 
@@ -22,42 +22,55 @@ public class PlayerController : MonoBehaviour
     {
         if (DialogueManager.GetInstance() && DialogueManager.GetInstance().dialogueIsPlaying)
         {
-            Vector3 vec = Vector3.zero;
-            rb.velocity = vec * speed;
-            animator.SetBool("isWalking", false); // Ensure the walking animation stops during dialogue
+            StopMovementAndAnimation();
             return;
         }
 
+        GroundPositionAdjustment();
+        HandleMovement();
+        FlipSpriteBasedOnDirection();
+    }
+
+    public void StopMovementAndAnimation()
+    {
+        rb.velocity = Vector3.zero;
+        animator.SetBool("isWalking", false);
+    }
+
+    private void GroundPositionAdjustment()
+    {
         RaycastHit hit;
-        Vector3 castPos = transform.position;
-        castPos.y += 1;
+        Vector3 castPos = transform.position + Vector3.up; // Simplified adjustment
         if (Physics.Raycast(castPos, -transform.up, out hit, Mathf.Infinity, terrainLayer))
         {
             if (hit.collider != null)
             {
-                Vector3 movPos = transform.position;
-                movPos.y = hit.point.y + groudDist;
-                transform.position = movPos;
+                transform.position = new Vector3(transform.position.x, hit.point.y + groundDist, transform.position.z);
             }
         }
+    }
 
+    private void HandleMovement()
+    {
         float x = Input.GetAxis("Horizontal");
         float y = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(x, 0, y);
         rb.velocity = moveDir * speed;
 
-        // Determine if the player is walking based on movement input
-        bool isWalking = moveDir.magnitude > 0;
-        animator.SetBool("isWalking", isWalking); // Update the Animator's isWalking parameter
+        // Update walking animation state
+        animator.SetBool("isWalking", moveDir.magnitude > 0 && speed > 0);
+    }
 
-        if (x != 0 && x < 0)
+    private void FlipSpriteBasedOnDirection()
+    {
+        float x = Input.GetAxis("Horizontal");
+        if (x < 0)
         {
             sr.flipX = true;
         }
-        else if (x != 0 && x > 0)
+        else if (x > 0)
         {
             sr.flipX = false;
         }
-
     }
 }

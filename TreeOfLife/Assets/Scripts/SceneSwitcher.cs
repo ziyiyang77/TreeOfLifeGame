@@ -16,8 +16,6 @@ public class SceneSwitcher : MonoBehaviour
     // Method to load the next scene
     void LoadNextScene()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        int nextSceneIndex = (currentSceneIndex + 1) % SceneManager.sceneCountInBuildSettings;  // Loop back to the first scene if it's the last one
         SceneTransitionManager.Instance.LoadScene(nextSceneName);  // Load the next scene
     }
 }

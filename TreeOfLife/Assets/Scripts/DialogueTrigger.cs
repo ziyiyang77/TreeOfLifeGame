@@ -31,6 +31,10 @@ public class DialogueTrigger : MonoBehaviour
             visualCue.SetActive(false);
         }
     }
+    public void SetCue()
+    {
+        visualCue.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

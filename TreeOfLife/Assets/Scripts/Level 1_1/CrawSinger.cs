@@ -8,9 +8,11 @@ public class CrawSinger : MonoBehaviour
     public AudioSource noteAudioSource;
     private int[][] noteSequences = new int[][]
     {
-        new int[] { 0, 4, 1 }, 
-        new int[] { 2, 0, 4, 4 }, 
-        
+        new int[] { 1, 3, 3, 4 },
+        new int[] { 1, 2 },
+        new int[] { 1, 2, 3 },
+        new int[] { 1, 2, 3, 4 },
+
     };
     private int currentPuzzleIndex = 0;
 
@@ -18,12 +20,16 @@ public class CrawSinger : MonoBehaviour
     {
         StartCoroutine(SingNotes());
     }
+    private void OnDisable()
+    {
+        StopAllCoroutines();  // This will stop all coroutines when the script is disabled
+    }
 
     IEnumerator SingNotes()
     {
         while (currentPuzzleIndex < noteSequences.Length)
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(2);
             int[] currentSequence = noteSequences[currentPuzzleIndex];
             float startTime = Time.time;
 

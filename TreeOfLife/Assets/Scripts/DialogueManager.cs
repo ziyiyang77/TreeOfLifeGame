@@ -1,9 +1,9 @@
-using Ink.Parsed;
+using Ink.Runtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using Ink.Runtime;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI dialogueText;
     private Ink.Runtime.Story currentStory;
     public bool dialogueIsPlaying { get; private set; }
+    [SerializeField] private GemController gemController;
+    [SerializeField] private DialogueTrigger dialogueTrigger;
 
     private void Awake()
     {
@@ -60,11 +62,19 @@ public class DialogueManager : MonoBehaviour
         dialogueIsPlaying = false;
         dialoguePanel.SetActive(false);
         dialogueText.text = "";
+
+        dialogueTrigger.SetCue();
+        dialogueTrigger.enabled = false;
+
+        // Check if the current scene is the special scene and if the dialogue just finished
+        if (SceneManager.GetActiveScene().name == "forest1.4" && gemController != null)
+        {
+            gemController.StartSequence();
+        }
     }
 
     private void ContinueStory()
     {
-
         if (currentStory.canContinue)
         {
             dialogueText.text = currentStory.Continue();
