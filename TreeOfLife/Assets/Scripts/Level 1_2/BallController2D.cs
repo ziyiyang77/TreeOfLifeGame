@@ -11,8 +11,9 @@ public class BallController2D : MonoBehaviour
     private void Start()
     {
         // 获取圆形杆的Transform组件
-     //   rodTransform = GameObject.Find("center_up").transform;
-      //  Debug.Log(rodTransform.position);
+        //   rodTransform = GameObject.Find("center_up").transform;
+        //  Debug.Log(rodTransform.position);
+       
     }
 
     private void OnMouseDown()
