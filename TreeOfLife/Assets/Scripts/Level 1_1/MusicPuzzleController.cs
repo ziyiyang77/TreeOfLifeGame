@@ -7,12 +7,16 @@ public class MusicPuzzleController : MonoBehaviour
     private List<int> currentMerrybellsOrder = new List<int>();
     private int currentPuzzleIndex = 0;
     public AudioSource wrongSoundSource;
+    public AudioSource bgmSource;           // AudioSource for the background music
+    public AudioClip merybellClip;      // AudioClip for the special music when all puzzles are completed
+    public AudioClip newBgmClip;            // AudioClip for the new background music
+
     private int[][] correctOrders = new int[][]
     {
         new int[] { 1 },
         new int[] { 1, 2 },
-        new int[] { 1 }, 
-        new int[] { 1, 2 },
+        new int[] { 1, 2, 3 },
+        new int[] { 1, 2, 3, 4 },
     };
     private float lastInteractionTime = 0f;
     private CrawSinger crawSinger;
@@ -77,7 +81,11 @@ public class MusicPuzzleController : MonoBehaviour
         {
             currentPuzzleIndex++;
             Debug.Log("All puzzles completed.");
-            DoorController.Instance.OpenDoor();
+            crawSinger.enabled = false;
+
+            bgmSource.clip = merybellClip; // Change to special music clip
+            bgmSource.Play();
+            StartCoroutine(SwitchBackgroundMusicAfterClipEnds(merybellClip.length));
         }
     }
 
@@ -103,7 +111,7 @@ public class MusicPuzzleController : MonoBehaviour
 
     IEnumerator FlashLights()
     {
-        Color originalColor = pointLights[0].color; // Assuming all lights start with the same color
+        Color originalColor = pointLights[0].color;
 
         foreach (var light in pointLights)
         {
@@ -111,13 +119,22 @@ public class MusicPuzzleController : MonoBehaviour
             light.enabled = true;
         }
 
-        yield return new WaitForSeconds(2); // Wait for 2 seconds
+        yield return new WaitForSeconds(2);
 
         foreach (var light in pointLights)
         {
             light.color = originalColor;
         }
 
-        UpdatePointLights(); // Restore the lighting state based on puzzle progress
+        UpdatePointLights();
+    }
+
+    IEnumerator SwitchBackgroundMusicAfterClipEnds(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        bgmSource.clip = newBgmClip; // Change back to the new BGM
+        bgmSource.Play();
+
+        DoorController.Instance.OpenDoor();
     }
 }
