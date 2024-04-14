@@ -11,14 +11,19 @@ public class MusicPuzzleController : MonoBehaviour
     {
         new int[] { 1 },
         new int[] { 1, 2 },
+        new int[] { 1 }, 
+        new int[] { 1, 2 },
     };
     private float lastInteractionTime = 0f;
     private CrawSinger crawSinger;
     public List<Light> pointLights; // Reference to the point lights
+    private Color Green;
+
 
     void Start()
     {
         crawSinger = FindObjectOfType<CrawSinger>();
+        Green = pointLights[0].color;
         UpdatePointLights();
     }
 
@@ -72,6 +77,7 @@ public class MusicPuzzleController : MonoBehaviour
         {
             currentPuzzleIndex++;
             Debug.Log("All puzzles completed.");
+            DoorController.Instance.OpenDoor();
         }
     }
 
@@ -82,6 +88,10 @@ public class MusicPuzzleController : MonoBehaviour
 
     void UpdatePointLights()
     {
+        foreach (var light in pointLights)
+        {
+            light.color = Green;
+        }
         for (int i = 0; i < pointLights.Count; i++)
         {
             if (i < currentPuzzleIndex)
