@@ -13,10 +13,10 @@ public class MusicPuzzleController : MonoBehaviour
 
     private int[][] correctOrders = new int[][]
     {
-        new int[] { 1 },
-        new int[] { 1, 2 },
-        new int[] { 1, 2, 3 },
-        new int[] { 1, 2, 3, 4 },
+        new int[] { 0, 4, 1 },
+        new int[] { 2, 0, 4, 5 },
+        new int[] { 2, 5, 6, 4, 1 },
+        new int[] { 4, 2, 3, 0, 5, 2 }
     };
     private float lastInteractionTime = 0f;
     private CrawSinger crawSinger;
@@ -40,6 +40,7 @@ public class MusicPuzzleController : MonoBehaviour
         else
         {
             currentMerrybellsOrder.Add(activatedMerrybellId);
+            Debug.Log("add " +  activatedMerrybellId);
             CheckOrder();
         }
 
