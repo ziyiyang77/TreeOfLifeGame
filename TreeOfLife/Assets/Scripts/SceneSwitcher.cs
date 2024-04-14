@@ -10,6 +10,7 @@ public class SceneSwitcher : MonoBehaviour
         if (other.CompareTag("Player"))  // Make sure it's the player entering the trigger
         {
             LoadNextScene();
+            Debug.Log("next scene");
         }
     }
 

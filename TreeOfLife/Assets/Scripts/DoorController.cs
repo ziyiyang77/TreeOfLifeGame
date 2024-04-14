@@ -41,7 +41,7 @@ public class DoorController : MonoBehaviour
             isOpening = true;
             StartCoroutine(OpenDoorRoutine());
         }
-
+        Debug.Log("door switcher ");
         SceneSwitcher.SetActive(true);
         Block.SetActive(false);
     }

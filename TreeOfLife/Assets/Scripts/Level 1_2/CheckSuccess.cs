@@ -16,6 +16,10 @@ public class CheckSucess : MonoBehaviour
     private int count = 0;
     private bool isfirstsuccess = true;
 
+    public GameObject cue; //F sprite
+    public GameObject Block;
+    public GameObject SceneSwitcher;
+
     void Start()
     {
         mainCamera = Camera.main;
@@ -43,18 +47,19 @@ public class CheckSucess : MonoBehaviour
             // 检查小球是否在指定位置附近  
             if (Vector3.Distance(ballPosition, targetPosition) <= tolerance)
             {
-                Debug.Log("小球 " + i + " 在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+               Debug.Log("小球 " + i + " 在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
                 count++;
             }
             else
             {
-                Debug.Log("小球 " + i + " 不在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+               Debug.Log("小球 " + i + " 不在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
                 count--;
             }
         }
         Debug.Log("count"+count);
         if (count== ballTransforms.Count)
-        { 
+        {
+            cue.SetActive(false);
             mainCamera.enabled = true;
             firstCamera.enabled = false;
             Debug.Log("sucess!");
@@ -62,8 +67,12 @@ public class CheckSucess : MonoBehaviour
             {
                 isfirstsuccess = false;
                 DoorController.Instance.OpenDoor();
+                SceneSwitcher.SetActive(true);
+                SceneTransitionManager.Instance.LoadScene("forest1.4");
+              //  SceneManager.LoadScene("forest1.4");
+                Block.SetActive(false);
             }
-            //   SceneManager.LoadScene("Level 1_3");
+           
         }
     }
 }
