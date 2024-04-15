@@ -6159,6 +6159,7 @@ MonoBehaviour:
   topBlackSprite: {fileID: 73715642}
   bottomBlackSprite: {fileID: 1500669996}
   crawSingerScript: {fileID: 1340770646}
+  puzzleController: {fileID: 1423443969}
   moveDistance: 200
   moveDuration: 1
 --- !u!65 &794738950
@@ -10940,8 +10941,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   wrongSoundSource: {fileID: 1423443968}
   bgmSource: {fileID: 1579317904}
-  merybellClip: {fileID: 8300000, guid: af401c4fc60d2ed4c86a809f81cdac98, type: 3}
+  merybellClip: {fileID: 8300000, guid: aae4f88824e3b6c4d92ce5de8957e088, type: 3}
   newBgmClip: {fileID: 8300000, guid: 44f8b0be84dcf854b9a67207841b4c51, type: 3}
+  lastInteractionTime: 0
   pointLights:
   - {fileID: 191643228}
   - {fileID: 1655777836}
@@ -16098,7 +16100,7 @@ MonoBehaviour:
   rightPanel: {fileID: 829179983}
   openSound: {fileID: 8300000, guid: 29a15fb310ff8bb4da9e46d42f48b9b9, type: 3}
   openDistance: 2
-  openSpeed: 1
+  openSpeed: 5
   SceneSwitcher: {fileID: 2101694985}
   Block: {fileID: 813943691}
 --- !u!1001 &2085283968
