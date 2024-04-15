@@ -4,6 +4,7 @@ using System.Collections;
 
 public class GemController : MonoBehaviour
 {
+    public PlayerController playerController;
     public GameObject gem; // The GameObject to manipulate
     public Vector3 positionOffset; // Offset from the player's position
     public float moveSpeed = 1f; // Speed of the movement
@@ -27,6 +28,10 @@ public class GemController : MonoBehaviour
 
     private IEnumerator Sequence()
     {
+        // Disable player movement
+        playerController.StopMovementAndAnimation();
+        playerController.enabled = false;
+
         // Calculate new position based on the player's position plus the offset
         Vector3 newPosition = playerTransform.position + positionOffset;
 

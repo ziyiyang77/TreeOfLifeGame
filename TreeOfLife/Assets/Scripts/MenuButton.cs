@@ -22,4 +22,15 @@ public class MenuButton : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void ExitGame()
+    {
+        // Exit the application
+        Application.Quit();
+
+        // If you are running the game in the Unity editor
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
 }

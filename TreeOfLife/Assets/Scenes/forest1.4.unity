@@ -10720,6 +10720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9f688809bed3b94fbfb94d3f4a81f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerController: {fileID: 1793780927}
   gem: {fileID: 832747829}
   positionOffset: {x: 3, y: -7.7, z: 0}
   moveSpeed: 3
@@ -11664,7 +11665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1497932056
 AudioSource:
   m_ObjectHideFlags: 0
