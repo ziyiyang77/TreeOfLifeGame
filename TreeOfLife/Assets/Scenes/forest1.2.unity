@@ -1047,7 +1047,7 @@ Transform:
   m_GameObject: {fileID: 99487705}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07584892, y: 0, z: 0, w: 0.99711937}
-  m_LocalPosition: {x: 83.68, y: 13.152608, z: -29.88494}
+  m_LocalPosition: {x: 25.009094, y: 13.152608, z: -29.88494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10778,8 +10778,8 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 40, y: -20}
-      - {x: 40, y: 50}
+    - - {x: 16, y: -20}
+      - {x: 16, y: 50}
       - {x: -50, y: 50}
       - {x: -50, y: -20}
   m_UseDelaunayMesh: 0
@@ -12363,7 +12363,7 @@ Transform:
   m_GameObject: {fileID: 1436058542}
   serializedVersion: 2
   m_LocalRotation: {x: 0.07584892, y: 0, z: 0, w: 0.99711937}
-  m_LocalPosition: {x: 83.68, y: 13.152608, z: -29.88494}
+  m_LocalPosition: {x: 4, y: 13.152608, z: -29.88494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13593,7 +13593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1592696926
 Transform:
   m_ObjectHideFlags: 0
@@ -14886,7 +14886,7 @@ Transform:
   m_GameObject: {fileID: 1752172513}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.68, y: 6.64, z: 10}
+  m_LocalPosition: {x: 4, y: 6.64, z: 10}
   m_LocalScale: {x: 0.6554528, y: 0.6554528, z: 0.6554528}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -17911,6 +17911,7 @@ MonoBehaviour:
   openSpeed: 5
   SceneSwitcher: {fileID: 2101694985}
   Block: {fileID: 813943691}
+  DoorLight: {fileID: 1592696925}
 --- !u!1001 &2072378476
 PrefabInstance:
   m_ObjectHideFlags: 0

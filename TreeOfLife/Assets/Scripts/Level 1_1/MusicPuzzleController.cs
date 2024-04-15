@@ -16,7 +16,7 @@ public class MusicPuzzleController : MonoBehaviour
         new int[] { 0, 4, 1 },
         new int[] { 2, 0, 4, 5 },
         new int[] { 2, 5, 6, 4, 1 },
-        new int[] { 4, 2, 3, 0, 5, 2 }
+        new int[] { 4, 2, 1, 0, 5, 2 }
     };
     public float lastInteractionTime = -1f;
     private CrawSinger crawSinger;
