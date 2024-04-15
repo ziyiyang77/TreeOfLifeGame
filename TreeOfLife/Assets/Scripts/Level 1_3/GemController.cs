@@ -9,6 +9,7 @@ public class GemController : MonoBehaviour
     public float moveSpeed = 1f; // Speed of the movement
     public string nextSceneName; // The name of the next scene to load
     public Transform playerTransform; // Reference to the player's Transform
+    public AudioSource gemSFX;
 
     void Start()
     {
@@ -30,6 +31,8 @@ public class GemController : MonoBehaviour
         Vector3 newPosition = playerTransform.position + positionOffset;
 
         gem.SetActive(true); // Activate the GameObject
+
+        gemSFX.Play();
 
         // Move to the new position smoothly
         while (Vector3.Distance(gem.transform.position, newPosition) > 0.01f)

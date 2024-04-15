@@ -13,12 +13,12 @@ public class MusicPuzzleController : MonoBehaviour
 
     private int[][] correctOrders = new int[][]
     {
-        new int[] { 1 },
-        new int[] { 1, 2 },
-        new int[] { 1, 2, 3 },
-        new int[] { 1, 2, 3, 4 },
+        new int[] { 0, 4, 1 },
+        new int[] { 2, 0, 4, 5 },
+        new int[] { 2, 5, 6, 4, 1 },
+        new int[] { 4, 2, 3, 0, 5, 2 }
     };
-    private float lastInteractionTime = 0f;
+    public float lastInteractionTime = -1f;
     private CrawSinger crawSinger;
     public List<Light> pointLights; // Reference to the point lights
     private Color Green;
@@ -33,18 +33,22 @@ public class MusicPuzzleController : MonoBehaviour
 
     public void HandleMerrybellActivated(int activatedMerrybellId)
     {
-        if (Time.time - lastInteractionTime > 30)
+        if (lastInteractionTime == -1)
+        {
+            lastInteractionTime = Time.time;
+        }
+        else if (Time.time - lastInteractionTime > 30)
         {
             ResetPuzzle();
         }
-        else
-        {
-            currentMerrybellsOrder.Add(activatedMerrybellId);
-            CheckOrder();
-        }
+
+        currentMerrybellsOrder.Add(activatedMerrybellId);
+        Debug.Log("add " + activatedMerrybellId);
+        CheckOrder();
 
         lastInteractionTime = Time.time;
     }
+
 
     void CheckOrder()
     {
@@ -83,9 +87,7 @@ public class MusicPuzzleController : MonoBehaviour
             Debug.Log("All puzzles completed.");
             crawSinger.enabled = false;
 
-            bgmSource.clip = merybellClip; // Change to special music clip
-            bgmSource.Play();
-            StartCoroutine(SwitchBackgroundMusicAfterClipEnds(merybellClip.length));
+            StartCoroutine(SwitchBackgroundMusicAfterClipEnds());
         }
     }
 
@@ -129,9 +131,12 @@ public class MusicPuzzleController : MonoBehaviour
         UpdatePointLights();
     }
 
-    IEnumerator SwitchBackgroundMusicAfterClipEnds(float delay)
+    IEnumerator SwitchBackgroundMusicAfterClipEnds()
     {
-        yield return new WaitForSeconds(delay);
+        bgmSource.clip = merybellClip; // Change to special music clip
+        yield return new WaitForSeconds(2);
+        bgmSource.Play();
+        yield return new WaitForSeconds(merybellClip.length-4);
         bgmSource.clip = newBgmClip; // Change back to the new BGM
         bgmSource.Play();
 

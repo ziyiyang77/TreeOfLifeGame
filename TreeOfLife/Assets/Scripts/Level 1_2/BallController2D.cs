@@ -7,13 +7,27 @@ public class BallController2D : MonoBehaviour
     public Transform rodTransform;
     public float radius = 1.68f;
     public Camera GetCamera;
+    private CircleCollider2D circleCollider2D;
 
     private void Start()
     {
-        // 获取圆形杆的Transform组件
-     //   rodTransform = GameObject.Find("center_up").transform;
-      //  Debug.Log(rodTransform.position);
+        
     }
+
+        void Update()
+        {
+        circleCollider2D = GetComponent<CircleCollider2D>();
+        if (GetCamera.enabled==false||CheckSucess.isfirstsuccess==false)
+        {
+        //    Debug.Log("collider is unable");
+            circleCollider2D.enabled = false;
+        }
+        else
+        {
+            circleCollider2D.enabled = true;
+
+        }
+        }
 
     private void OnMouseDown()
     {

@@ -6,7 +6,8 @@ public class CameraSwitcher : MonoBehaviour
 
     private Camera mainCamera; 
     private bool isInTriggerZone = false;
-  
+
+    public GameObject cue; 
 
 
     void Start()
@@ -38,13 +39,16 @@ public class CameraSwitcher : MonoBehaviour
     {
         if (isInTriggerZone && Input.GetKeyDown(KeyCode.F))
         {
-
+            cue.SetActive(false);
             firstCamera.enabled = true;
             
             mainCamera.enabled = false;
             Debug.Log("first view");   
         }
-        
+        else
+        {
+            cue.SetActive(true);
+        }
        
 
 

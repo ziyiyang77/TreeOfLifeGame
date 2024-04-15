@@ -7,7 +7,7 @@ public class Merrybell : MonoBehaviour
     private bool isPlayerInRange = false;
     public MusicPuzzleController puzzleController;
 
-    void Start()
+    void Awake()
     {
         puzzleController = FindObjectOfType<MusicPuzzleController>();
     }
