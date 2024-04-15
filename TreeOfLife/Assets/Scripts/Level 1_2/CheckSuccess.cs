@@ -8,7 +8,7 @@ public class CheckSucess : MonoBehaviour
     public Camera firstCamera;
     private Camera mainCamera;
 
-    public float tolerance = 0.3f; // 用于判断位置是否匹配的容差  
+    public float tolerance = 0.1f; // 用于判断位置是否匹配的容差  
     public List<GameObject> balls; // 存放小球Transform的列表  
     public List<Transform> targetPositions; // 存放小球目标位置的列表  
     private  int count = 0;
@@ -50,12 +50,12 @@ public class CheckSucess : MonoBehaviour
             // 检查小球是否在指定位置附近  
             if (Vector3.Distance(ballPosition, targetPosition) <= tolerance)
             {
-            //   Debug.Log("小球 " + i + " 在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+               Debug.Log("小球 " + i + " 在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
                 count++;
             }
             else
             {
-             //  Debug.Log("小球 " + i + " 不在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+               Debug.Log("小球 " + i + " 不在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
                 count--;
             }
         }
