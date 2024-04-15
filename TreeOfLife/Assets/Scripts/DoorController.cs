@@ -18,6 +18,7 @@ public class DoorController : MonoBehaviour
 
     public GameObject SceneSwitcher;
     public GameObject Block;
+    public GameObject DoorLight;
 
     void Awake()
     {
@@ -44,6 +45,7 @@ public class DoorController : MonoBehaviour
         Debug.Log("door switcher ");
         SceneSwitcher.SetActive(true);
         Block.SetActive(false);
+        DoorLight.SetActive(true);
     }
 
     private IEnumerator OpenDoorRoutine()
