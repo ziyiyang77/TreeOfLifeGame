@@ -7,10 +7,25 @@ public class RotateLight : MonoBehaviour
     public Transform rodTransform;
     public float radius=2.53f;//The plate radius is 2.53f
     public Camera GetCamera;// get the first view camera
+    private CircleCollider2D circleCollider2D;
 
     private void Start()
     {
-        
+     
+    }
+    void Update()
+    {
+        circleCollider2D = GetComponent<CircleCollider2D>();
+        if (GetCamera.enabled == false||CheckSucess.isfirstsuccess==false)
+        {
+        //    Debug.Log("collider is unable");
+            circleCollider2D.enabled = false;
+        }
+        else
+        {
+            circleCollider2D.enabled = true;
+
+        }
     }
 
     private void OnMouseDown()
