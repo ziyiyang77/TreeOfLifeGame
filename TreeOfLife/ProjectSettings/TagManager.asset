@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pos
   - FadePanel
+  - Laser
   layers:
   - Default
   - TransparentFX

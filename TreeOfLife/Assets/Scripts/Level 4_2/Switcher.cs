@@ -8,6 +8,7 @@ public class Switcher : MonoBehaviour
 
     public GameObject cue;
     public GameObject back;//±³Ó°
+  //  public GameObject back2;
     public GameObject character;
     public GameObject A;
     public GameObject D;

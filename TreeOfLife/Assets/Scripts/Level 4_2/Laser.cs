@@ -8,7 +8,7 @@ public class Laser : MonoBehaviour
     [Header("Settings")]
     public LayerMask layerMask;
     private float defaultLength = 50f;
-    public int numOfReflections = 2;
+    public int numOfReflections = 3;
 
     private LineRenderer _lineRenderer;
     private Camera _mycam;
@@ -16,6 +16,10 @@ public class Laser : MonoBehaviour
 
     private Ray ray;
     private Vector3 direction;
+
+    public Light pointlight;
+    public GameObject endpoint;
+    private bool isLastObjectHit = false;
 
     // Start is called before the first frame update
     void Start()
@@ -37,9 +41,10 @@ public class Laser : MonoBehaviour
 
         float remainLength = defaultLength;
 
-        for(int i=0;i<numOfReflections;i++)
+        int i;
+        for ( i = 0; i < numOfReflections; i++)
         {
-            if(Physics.Raycast(ray.origin,ray.direction,out hit ,remainLength,layerMask))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainLength, layerMask))
             {
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, hit.point);
@@ -47,15 +52,23 @@ public class Laser : MonoBehaviour
                 remainLength -= Vector3.Distance(ray.origin, hit.point);
 
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+                if(hit.collider.transform == endpoint.transform)
+                {
+                //    Debug.Log("succss!");
+                    isLastObjectHit = true;
+                    pointlight.color = Color.green;
+                    break;
+                }
             }
             else
             {
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, ray.origin + (ray.direction * remainLength));
-                    
-                
+                isLastObjectHit = false;
+                pointlight.color = Color.red;
             }
         }
+            
     }
     void NormalLaser()
     {
