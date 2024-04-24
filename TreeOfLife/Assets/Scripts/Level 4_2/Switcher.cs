@@ -12,6 +12,7 @@ public class Switcher : MonoBehaviour
     public GameObject character;
     public GameObject A;
     public GameObject D;
+    public GameObject ESC;
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
     {
@@ -45,6 +46,7 @@ public class Switcher : MonoBehaviour
             back.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
+            ESC.SetActive(true);
         }
         else if(isInTriggerZone && Input.GetKeyDown(KeyCode.Escape))
         {
@@ -53,6 +55,7 @@ public class Switcher : MonoBehaviour
             back.SetActive(false);
             A.SetActive(false);
             D.SetActive(false);
+            ESC.SetActive(false);
         }
 
     }

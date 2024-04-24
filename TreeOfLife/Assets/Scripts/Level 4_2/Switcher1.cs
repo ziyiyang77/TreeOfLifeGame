@@ -11,6 +11,7 @@ public class Switcher1 : MonoBehaviour
     public GameObject character;
     public GameObject A;
     public GameObject D;
+    public GameObject ESC;
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
     {
@@ -32,6 +33,7 @@ public class Switcher1 : MonoBehaviour
     void Start()
     {
         back.SetActive(false);
+        ESC.SetActive(false);
     }
 
     // Update is called once per frame
