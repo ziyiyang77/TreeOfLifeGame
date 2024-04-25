@@ -7,7 +7,7 @@ public class LaserRotate : MonoBehaviour
 {
     [Header("Settings")]
     public LayerMask layerMask;
-    private float defaultLength = 50f;
+    private float defaultLength = 100f;
     public int numOfReflections = 3;
 
     private LineRenderer _lineRenderer;

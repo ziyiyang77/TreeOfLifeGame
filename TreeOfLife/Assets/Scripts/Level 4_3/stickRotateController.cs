@@ -11,16 +11,18 @@ public class stickRotateController : MonoBehaviour
     private bool rotatingA = false; // 是否正在执行A键旋转
     private bool rotatingD = false; // 是否正在执行F键旋转
 
+    public GameObject back;
+
     void Update()
     {
         // 长按A键
-        if (Input.GetKey(KeyCode.A))
+        if (back.activeSelf&&Input.GetKey(KeyCode.A))
         {
             rotatingA = true;
             rotatingD = false;
         }
         // 长按F键
-        else if (Input.GetKey(KeyCode.D))
+        else if (back.activeSelf&&Input.GetKey(KeyCode.D))
         {
             rotatingA = false;
             rotatingD = true;
