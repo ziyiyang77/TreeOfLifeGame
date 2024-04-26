@@ -21,6 +21,9 @@ public class LaserRotate : MonoBehaviour
     public GameObject endpoint;
     private bool isLastObjectHit = false;
 
+    public GameObject doortrigger;
+    private bool isopening = false;
+    public Animator animator;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,8 +33,9 @@ public class LaserRotate : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        ReflectLaser();
+    {    
+       ReflectLaser();
+      
     }
     void ReflectLaser()
     {
@@ -55,6 +59,17 @@ public class LaserRotate : MonoBehaviour
                 if (hit.collider.transform == endpoint.transform)
                 {
                     //    Debug.Log("succss!");
+                    doortrigger.SetActive(false);
+                    if (isopening == false)
+                    {
+                        Debug.Log("open!");
+                        isopening = true;
+                        animator.SetBool("doorclose", false);
+                        animator.SetBool("dooropen", true);
+                       
+
+                    }
+
                     isLastObjectHit = true;
                     pointlight.color = Color.green;
                     break;
@@ -62,6 +77,15 @@ public class LaserRotate : MonoBehaviour
             }
             else
             {
+                if (isopening)
+                {
+                    Debug.Log("close!");
+                    isopening = false;
+                    animator.SetBool("dooropen", false);
+                    animator.SetBool("doorclose", true);
+                }
+               // isfirstopen = true;
+                doortrigger.SetActive(true);
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, ray.origin + (ray.direction * remainLength));
                 isLastObjectHit = false;
