@@ -24,11 +24,16 @@ public class LaserRotate : MonoBehaviour
     public GameObject doortrigger;
     private bool isopening = false;
     public Animator animator;
+
+    public AudioClip openSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _mycam = Camera.main;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,8 +50,7 @@ public class LaserRotate : MonoBehaviour
 
         float remainLength = defaultLength;
 
-        int i;
-        for (i = 0; i < numOfReflections; i++)
+        for (int i = 0; i < numOfReflections; i++)
         {
             if (Physics.Raycast(ray.origin, ray.direction, out hit, remainLength, layerMask))
             {
@@ -64,9 +68,8 @@ public class LaserRotate : MonoBehaviour
                     {
                         Debug.Log("open!");
                         isopening = true;
-                        animator.SetBool("doorclose", false);
-                        animator.SetBool("dooropen", true);
-                       
+                        animator.SetTrigger("open");
+                        audioSource.PlayOneShot(openSound);
 
                     }
 
@@ -81,10 +84,10 @@ public class LaserRotate : MonoBehaviour
                 {
                     Debug.Log("close!");
                     isopening = false;
-                    animator.SetBool("dooropen", false);
-                    animator.SetBool("doorclose", true);
+                    animator.SetTrigger("close");
+                    audioSource.PlayOneShot(openSound);
+
                 }
-               // isfirstopen = true;
                 doortrigger.SetActive(true);
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, ray.origin + (ray.direction * remainLength));
