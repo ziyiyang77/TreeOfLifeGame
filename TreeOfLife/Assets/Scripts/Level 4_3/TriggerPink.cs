@@ -46,7 +46,8 @@ public class TriggerPink : MonoBehaviour
     void Update()
     {
         if (isInTriggerZone && Input.GetKeyDown(KeyCode.F))
-        { 
+        {
+            cue.SetActive(false);
             character.SetActive(false);
             back.SetActive(true);
             A.SetActive(true);

@@ -18,7 +18,8 @@ public class Switcher1 : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInTriggerZone = true;
-            Debug.Log("OnTriggerEnter2");
+            cue.SetActive(true);
+            Debug.Log("OnTriggerEnter1");
         }
     }
 
@@ -26,13 +27,17 @@ public class Switcher1 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            cue.SetActive(false);
             isInTriggerZone = false;
-            Debug.Log("OnTriggerExit2");
+            Debug.Log("OnTriggerExit1");
         }
     }
     void Start()
     {
+        cue.SetActive(false);
         back.SetActive(false);
+        A.SetActive(false);
+        D.SetActive(false);
         ESC.SetActive(false);
     }
 
@@ -46,14 +51,16 @@ public class Switcher1 : MonoBehaviour
             back.SetActive(true);
             A.SetActive(true);
             D.SetActive(true);
+            ESC.SetActive(true);
         }
-        else if(isInTriggerZone && Input.GetKeyDown(KeyCode.Escape))
+        else if (isInTriggerZone && Input.GetKeyDown(KeyCode.Escape))
         {
-            cue.SetActive(true);
+
             character.SetActive(true);
             back.SetActive(false);
             A.SetActive(false);
             D.SetActive(false);
+            ESC.SetActive(false);
         }
 
     }

@@ -30,7 +30,7 @@ EditorBuildSettings:
     path: Assets/Scenes/factory/factory4.2.unity
     guid: 477100481671d864e90ad45c1d80e7a4
   - enabled: 1
-    path: Assets/Scenes/factory4.3.unity
+    path: Assets/Scenes/factory/factory4.3.unity
     guid: dfd0f07d12f03f246a937abcbc6e5248
   - enabled: 1
     path: Assets/Scenes/factory4.4.unity
