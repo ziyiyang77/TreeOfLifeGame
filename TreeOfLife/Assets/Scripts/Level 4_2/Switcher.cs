@@ -8,7 +8,6 @@ public class Switcher : MonoBehaviour
 
     public GameObject cue;
     public GameObject back;//±³Ó°
-  //  public GameObject back2;
     public GameObject character;
     public GameObject A;
     public GameObject D;
@@ -19,7 +18,8 @@ public class Switcher : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isInTriggerZone = true;
-            Debug.Log("OnTriggerEnter1");
+            cue.SetActive(true);
+            Debug.Log("OnTriggerEnter2");
         }
     }
 
@@ -27,13 +27,18 @@ public class Switcher : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            cue.SetActive(false);
             isInTriggerZone = false;
-            Debug.Log("OnTriggerExit1");
+            Debug.Log("OnTriggerExit2");
         }
     }
     void Start()
     {
+        cue.SetActive(false);
         back.SetActive(false);
+        A.SetActive(false);
+        D.SetActive(false);
+        ESC.SetActive(false);
     }
 
     // Update is called once per frame
@@ -50,7 +55,7 @@ public class Switcher : MonoBehaviour
         }
         else if(isInTriggerZone && Input.GetKeyDown(KeyCode.Escape))
         {
-            cue.SetActive(true);
+           
             character.SetActive(true);
             back.SetActive(false);
             A.SetActive(false);

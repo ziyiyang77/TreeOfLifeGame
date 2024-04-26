@@ -17,15 +17,10 @@ public class SlideController : MonoBehaviour
     private float laststickz;
 
     public GameObject back;
-    public GameObject A;
-    public GameObject D;
-    public GameObject ESC;
 
     private void Start()
     {
-        A.SetActive(false);
-        D.SetActive(false);
-        ESC.SetActive(false);
+       
         stickz = joystick.localEulerAngles.z;
         laststickz = stickz;
     }

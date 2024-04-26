@@ -47,6 +47,7 @@ public class TriggerBlue : MonoBehaviour
     {
         if (isInTriggerZone && Input.GetKeyDown(KeyCode.F))
         {
+            cue.SetActive(false);
             character.SetActive(false);
             back.SetActive(true);
             A.SetActive(true);

@@ -7,7 +7,7 @@ public class Laser : MonoBehaviour
 {
     [Header("Settings")]
     public LayerMask layerMask;
-    private float defaultLength = 50f;
+    private float defaultLength = 100f;
     public int numOfReflections = 3;
 
     private LineRenderer _lineRenderer;
@@ -21,17 +21,26 @@ public class Laser : MonoBehaviour
     public GameObject endpoint;
     private bool isLastObjectHit = false;
 
+    public GameObject doortrigger;
+    private bool isopening = false;
+    public Animator animator;
+
+    public AudioClip openSound;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _mycam = Camera.main;
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
         ReflectLaser();
+
     }
     void ReflectLaser()
     {
@@ -41,8 +50,7 @@ public class Laser : MonoBehaviour
 
         float remainLength = defaultLength;
 
-        int i;
-        for ( i = 0; i < numOfReflections; i++)
+        for (int i = 0; i < numOfReflections; i++)
         {
             if (Physics.Raycast(ray.origin, ray.direction, out hit, remainLength, layerMask))
             {
@@ -52,9 +60,19 @@ public class Laser : MonoBehaviour
                 remainLength -= Vector3.Distance(ray.origin, hit.point);
 
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
-                if(hit.collider.transform == endpoint.transform)
+                if (hit.collider.transform == endpoint.transform)
                 {
-                //    Debug.Log("succss!");
+                    //    Debug.Log("succss!");
+                    doortrigger.SetActive(false);
+                    if (isopening == false)
+                    {
+                        Debug.Log("open!");
+                        isopening = true;
+                        animator.SetTrigger("close");
+                        audioSource.PlayOneShot(openSound);
+
+                    }
+
                     isLastObjectHit = true;
                     pointlight.color = Color.green;
                     break;
@@ -62,13 +80,22 @@ public class Laser : MonoBehaviour
             }
             else
             {
+                if (isopening)
+                {
+                    Debug.Log("close!");
+                    isopening = false;
+                    animator.SetTrigger("open");
+                    audioSource.PlayOneShot(openSound);
+
+                }
+                doortrigger.SetActive(true);
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, ray.origin + (ray.direction * remainLength));
                 isLastObjectHit = false;
                 pointlight.color = Color.red;
             }
         }
-            
+
     }
     void NormalLaser()
     {
