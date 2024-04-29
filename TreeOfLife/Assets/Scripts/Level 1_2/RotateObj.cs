@@ -48,15 +48,24 @@ public class RotateObj : MonoBehaviour
 
     private void Update()
     {
-        Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        if(CheckSucess.isfirstsuccess)
         {
-            if (hit.collider == boxCollider)
+            Ray ray = myCam.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                isDragging = true;
-            }                      
+                if (hit.collider == boxCollider)
+                {
+                    isDragging = true;
+                }
+
+            }
         }
+        else
+        {
+            boxCollider.enabled = false;
+        }
+       
        
 
     }
