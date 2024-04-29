@@ -12,6 +12,12 @@ public class StickYellowRotate : MonoBehaviour
     private bool rotatingD = false; // 是否正在执行F键旋转
 
     public GameObject back;
+    private AudioSource audio;
+    void Start()
+    {
+        audio = GetComponent<AudioSource>();
+
+    }
     void Update()
     {
         // 长按A键
@@ -35,12 +41,14 @@ public class StickYellowRotate : MonoBehaviour
         // 根据按键状态执行操作
         if (rotatingA)
         {
+            audio.Play();
             joystick.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
             cube.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
            
         }
         else if (rotatingD)
         {
+            audio.Play();
             joystick.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
             cube.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
         }

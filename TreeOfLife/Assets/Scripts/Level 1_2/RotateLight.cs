@@ -44,7 +44,11 @@ public class RotateLight : MonoBehaviour
           
             newPosition = LimitToRod(newPosition);
             
-            transform.position = newPosition;
+            if(transform.name=="right"&&newPosition.x>=1f)
+               transform.position = newPosition;
+            if(transform.name == "left"&& newPosition.x <= 1f)
+                transform.position = newPosition;
+            Debug.Log(transform.position);
         }
     }
 
@@ -56,7 +60,9 @@ public class RotateLight : MonoBehaviour
         direction = direction.normalized * radius; 
         
         newPosition = rodTransform.position + direction;
+            
         return newPosition;
+       
     }
 
     private void OnMouseUp()

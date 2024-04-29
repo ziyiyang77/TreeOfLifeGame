@@ -17,10 +17,10 @@ public class SlideController : MonoBehaviour
     private float laststickz;
 
     public GameObject back;
-
+    AudioSource audio;
     private void Start()
     {
-       
+        audio = GetComponent<AudioSource>();
         stickz = joystick.localEulerAngles.z;
         laststickz = stickz;
     }
@@ -59,15 +59,17 @@ public class SlideController : MonoBehaviour
         if (rotatingD)
         {
             stickz -= Time.deltaTime * rotationSpeed;
+            audio.Play();
         }
         else if (rotatingA)
         {
             stickz += Time.deltaTime * rotationSpeed;
+            audio.Play();
         }
         stickz = ClampAngle(stickz, minAngle, maxAngle);
         Quaternion quaternion = Quaternion.Euler(0,0,stickz);
-        joystick.localRotation = quaternion;      
-        
+        joystick.localRotation = quaternion;
+       
         //…Ë÷√¡™∂Ø
         if (stickz != laststickz)
         {

@@ -7,7 +7,8 @@ public class LaserRotate : MonoBehaviour
 {
     [Header("Settings")]
     public LayerMask layerMask;
-    private float defaultLength = 100f;
+    public LayerMask blockMask;
+    private float defaultLength = 90f;
     public int numOfReflections = 3;
 
     private LineRenderer _lineRenderer;
@@ -33,7 +34,7 @@ public class LaserRotate : MonoBehaviour
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _mycam = Camera.main;
-        audioSource = GetComponent<AudioSource>();
+      audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -52,31 +53,50 @@ public class LaserRotate : MonoBehaviour
 
         for (int i = 0; i < numOfReflections; i++)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainLength, layerMask))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainLength, layerMask| blockMask))
             {
                 _lineRenderer.positionCount += 1;
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, hit.point);
 
-                remainLength -= Vector3.Distance(ray.origin, hit.point);
-
-                ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
-                if (hit.collider.transform == endpoint.transform)
+                if (((1 << hit.collider.gameObject.layer) & blockMask) != 0)
                 {
-                    //    Debug.Log("succss!");
-                    doortrigger.SetActive(false);
-                    if (isopening == false)
+                    if (isopening)
                     {
-                        Debug.Log("open!");
-                        isopening = true;
-                        animator.SetTrigger("open");
+                        Debug.Log("close!");
+                        isopening = false;
+                        animator.SetTrigger("close");
                         audioSource.PlayOneShot(openSound);
 
                     }
-
-                    isLastObjectHit = true;
-                    pointlight.color = Color.green;
+                    isLastObjectHit = false;
+                    pointlight.color = Color.red;
                     break;
                 }
+                else if (((1 << hit.collider.gameObject.layer) & layerMask) != 0)
+                {
+                    remainLength -= Vector3.Distance(ray.origin, hit.point);
+
+                    ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+
+                    if (hit.collider.transform == endpoint.transform)
+                    {
+                        //    Debug.Log("succss!");
+                        doortrigger.SetActive(false);
+                        if (isopening == false)
+                        {
+                            Debug.Log("open!");
+                            isopening = true;
+                            animator.SetTrigger("open");
+                           audioSource.PlayOneShot(openSound);
+                            
+                            
+                        }
+                        isLastObjectHit = true;
+                        pointlight.color = Color.green;
+                        break;
+                    }
+                }
+                
             }
             else
             {
@@ -85,7 +105,7 @@ public class LaserRotate : MonoBehaviour
                     Debug.Log("close!");
                     isopening = false;
                     animator.SetTrigger("close");
-                    audioSource.PlayOneShot(openSound);
+                  audioSource.PlayOneShot(openSound);
 
                 }
                 doortrigger.SetActive(true);
@@ -93,6 +113,7 @@ public class LaserRotate : MonoBehaviour
                 _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, ray.origin + (ray.direction * remainLength));
                 isLastObjectHit = false;
                 pointlight.color = Color.red;
+                break;
             }
         }
 
