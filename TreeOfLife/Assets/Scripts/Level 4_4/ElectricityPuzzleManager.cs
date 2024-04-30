@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ElectricityPuzzleManager : MonoBehaviour
@@ -6,6 +7,28 @@ public class ElectricityPuzzleManager : MonoBehaviour
     public int selectedTypeIndex = 0; // Index to track selected rotation type
     private Node.RotationType[] rotationTypes = { Node.RotationType.Arrow, Node.RotationType.Square, Node.RotationType.Triangle };
     private bool playerIsNearTrigger = false;
+    public Line[] lines;
+    public Checker[] checkers;
+
+    public List<MonoBehaviour> dynamicObj;
+
+    private void Start()
+    {
+        foreach (var line in lines)
+        {
+            line.UpdatePowerStatus();
+        }
+
+        foreach (var node in nodes)
+        {
+            node.UpdatePowerStatus();
+        }
+
+        foreach (var checker in checkers)
+        {
+            checker.UpdatePowerStatus();
+        }
+    }
 
     void Update()
     {
@@ -19,7 +42,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
                 }
                 else
                 {
-                    ResetAllNodes();
+                    //ResetAllNodes();
                 }
             }
         }
@@ -37,16 +60,51 @@ public class ElectricityPuzzleManager : MonoBehaviour
             if (selectedTypeIndex > 3)
                 selectedTypeIndex = 0; // Wrap around to Arrow
         }
+
+        UpdateAll();
     }
 
     private void RotateNodes(Node.RotationType type)
     {
+/*        foreach (var node in nodes)
+        {
+            node.ClearPowerData();
+        }
+
+        foreach (var line in lines)
+        {
+            line.ClearPowerData();
+        }
+
+        foreach (var checker in checkers)
+        {
+            checker.ClearPowerData();
+        }
+*/
         foreach (var node in nodes)
         {
             if (node.HasRotationType(type))
             {
                 node.RotateNode();
             }
+        }
+    }
+    
+    void UpdateAll()
+    {
+        foreach (var line in lines)
+        {
+            line.UpdatePowerStatus();
+        }
+
+        foreach (var node in nodes)
+        {
+            node.UpdatePowerStatus();
+        }
+
+        foreach (var checker in checkers)
+        {
+            checker.UpdatePowerStatus();
         }
     }
 

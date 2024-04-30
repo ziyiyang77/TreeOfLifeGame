@@ -29,19 +29,29 @@ public class Node : MonoBehaviour
     public float rotationSpeed = 100f; // Speed of rotation animation
     private bool isRotating = false; // Flag to prevent multiple rotations at once
 
+    private ElectricityPuzzleManager puzzleManager;
+
+    private void Awake()
+    {
+        puzzleManager = FindObjectOfType<ElectricityPuzzleManager>();
+    }
+
     void Start()
     {
         // Initialize the node
         hasPower = false;
         currentRotation = 0; // Initial rotation
     }
+    public void AddNodeToPuzzle(Node node)
+    {
+        if (!puzzleManager.dynamicObj.Contains(node))
+        {
+            puzzleManager.dynamicObj.Add(node);
+        }
+    }
 
     public void RotateNode()
     {
-        // Rotate the node 90 degrees clockwise
-        currentRotation += 90;
-        if (currentRotation >= 360)
-            currentRotation = 0;
 
         if (!isRotating)
         {
@@ -50,6 +60,11 @@ public class Node : MonoBehaviour
 
         // Update the node's power status based on new orientation
         UpdatePowerStatus();
+    }
+
+    public void ClearPowerData()
+    {
+        hasPower = false;
     }
 
     public bool HasRotationType(RotationType type)
@@ -79,19 +94,21 @@ public class Node : MonoBehaviour
                 break;
         }
 
+        if (hasPower) { AddNodeToPuzzle(this); }
+
         UpdateVisuals();
     }
 
     void CheckLPower()
     {
         // Check connections based on L-shape and current rotation
-        if (currentRotation == 0 && (CheckPower(upObject) || CheckPower(rightObject)))
+        if (currentRotation == 0 && (CheckPower(upObject) || CheckPower(leftObject)))
             hasPower = true;
-        else if (currentRotation == 90 && (CheckPower(rightObject) || CheckPower(downObject)))
+        else if (currentRotation == 90 && (CheckPower(leftObject) || CheckPower(downObject)))
             hasPower = true;
-        else if (currentRotation == 180 && (CheckPower(downObject) || CheckPower(leftObject)))
+        else if (currentRotation == 180 && (CheckPower(downObject) || CheckPower(rightObject)))
             hasPower = true;
-        else if (currentRotation == 270 && (CheckPower(leftObject) || CheckPower(upObject)))
+        else if (currentRotation == 270 && (CheckPower(rightObject) || CheckPower(upObject)))
             hasPower = true;
     }
 
@@ -100,11 +117,11 @@ public class Node : MonoBehaviour
         // Check connections based on T-shape and current rotation
         if (currentRotation == 0 && (CheckPower(upObject) || CheckPower(leftObject) || CheckPower(rightObject)))
             hasPower = true;
-        else if (currentRotation == 90 && (CheckPower(upObject) || CheckPower(rightObject) || CheckPower(downObject)))
+        else if (currentRotation == 90 && (CheckPower(upObject) || CheckPower(leftObject) || CheckPower(downObject)))
             hasPower = true;
         else if (currentRotation == 180 && (CheckPower(downObject) || CheckPower(leftObject) || CheckPower(rightObject)))
             hasPower = true;
-        else if (currentRotation == 270 && (CheckPower(upObject) || CheckPower(leftObject) || CheckPower(downObject)))
+        else if (currentRotation == 270 && (CheckPower(upObject) || CheckPower(rightObject) || CheckPower(downObject)))
             hasPower = true;
     }
 
@@ -117,10 +134,14 @@ public class Node : MonoBehaviour
         {
             return (obj as Node).hasPower;
         }
-        // If the object is a Checker, check its isConditionMet property
+        // If the object is a Checker, check its power property
         else if (obj is Checker)
         {
             return (obj as Checker).hasPower;
+        }
+        else if (obj is Line)
+        {
+            return (obj as Line).hasPower;
         }
         // If the object is a PowerSource, assume it always has power
         else if (obj is PowerSource)
