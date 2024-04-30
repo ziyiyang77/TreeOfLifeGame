@@ -2,22 +2,25 @@ using UnityEngine;
 
 public class Checker : MonoBehaviour
 {
-    // Adjacent nodes
-    public Node upNode;
-    public Node downNode;
-    public Node leftNode;
-    public Node rightNode;
+    // Adjacent lines
+    public Line upLine;
+    public Line downLine;
+    public Line leftLine;
+    public Line rightLine;
 
-    // Number of adjacent nodes that should be powered to satisfy the condition
+    // Number of adjacent lines that should be powered to satisfy the condition
     public int correctNumber;
 
-    // Tracks the current number of powered adjacent nodes
-    private int currentPoweredCount;
+    // Tracks the current number of powered adjacent lines
+    public int currentPoweredCount;
 
     // Boolean to track if the checker's condition is met
     public bool isConditionMet;
 
     public bool hasPower;
+
+    // Array of sprites to represent different power states
+    public Sprite[] powerSprites;
 
     void Start()
     {
@@ -26,48 +29,45 @@ public class Checker : MonoBehaviour
 
     void Update()
     {
-        // Continually check the power status of adjacent nodes
         UpdatePowerStatus();
     }
 
-    void UpdatePowerStatus()
+    public void ClearPowerData()
+    {
+        hasPower = false;
+    }
+
+    public void UpdatePowerStatus()
     {
         currentPoweredCount = 0;
 
-        // Check each connected node and count how many are powered
-        if (CheckIfPowered(upNode)) currentPoweredCount++;
-        if (CheckIfPowered(downNode)) currentPoweredCount++;
-        if (CheckIfPowered(leftNode)) currentPoweredCount++;
-        if (CheckIfPowered(rightNode)) currentPoweredCount++;
+        if (CheckIfPowered(upLine)) currentPoweredCount++;
+        if (CheckIfPowered(downLine)) currentPoweredCount++;
+        if (CheckIfPowered(leftLine)) currentPoweredCount++;
+        if (CheckIfPowered(rightLine)) currentPoweredCount++;
 
-        // Compare the count of powered nodes to the correct number
         isConditionMet = (currentPoweredCount == correctNumber);
+        hasPower = (currentPoweredCount > 0);
 
-        if(currentPoweredCount > 0)
-            hasPower = true;
-
-        // Update visual indicator here if needed
         UpdateVisuals();
     }
 
-    bool CheckIfPowered(Node node)
+    bool CheckIfPowered(Line line)
     {
-        // Return true if the node exists and is powered
-        return node != null && node.hasPower;
+        return line != null && line.hasPower;
     }
 
     void UpdateVisuals()
     {
-        // Change the visual representation based on whether the condition is met
-        if (isConditionMet)
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (powerSprites != null && powerSprites.Length == 4)
         {
-            // Logic to set the sprite color to green or an equivalent visual effect
-            GetComponent<SpriteRenderer>().color = Color.green;
+            int spriteIndex = currentPoweredCount;
+            if (spriteIndex > 3)
+                spriteIndex = 3;
+            // Change the sprite based on the number of powered lines
+            spriteRenderer.sprite = powerSprites[spriteIndex];
         }
-        else
-        {
-            // Logic to set the sprite color to red or an equivalent visual effect
-            GetComponent<SpriteRenderer>().color = Color.red;
-        }
+
     }
 }
