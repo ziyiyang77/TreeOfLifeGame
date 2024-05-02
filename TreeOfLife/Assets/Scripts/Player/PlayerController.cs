@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private float speed = 10; // This can be set to 0 initially or by other scripts
     public float groundDist;
 
+
     public LayerMask terrainLayer;
     public Rigidbody rb;
     public SpriteRenderer sr;

@@ -102,12 +102,8 @@ public class ButtonManage : MonoBehaviour
     {
       
         paperImage.gameObject.SetActive(false);
-<<<<<<< Updated upstream
         if (gemstone != null)
             gemstone.SetActive(true);
-=======
 
-    //    gemstone.SetActive(true);
->>>>>>> Stashed changes
     }
 }
