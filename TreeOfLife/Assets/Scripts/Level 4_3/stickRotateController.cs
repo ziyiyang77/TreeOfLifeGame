@@ -15,47 +15,50 @@ public class stickRotateController : MonoBehaviour
     private AudioSource audio;
     void Start()
     {
-       audio = GetComponent<AudioSource>();
-       
+        audio = GetComponent<AudioSource>();
+
     }
     void Update()
     {
         // 长按A键
-        if (back.activeSelf&&Input.GetKey(KeyCode.A))
+        if (back.activeSelf)
         {
-            rotatingA = true;
-            rotatingD = false;
-           
-        }
-        // 长按F键
-        else if (back.activeSelf&&Input.GetKey(KeyCode.D))
-        {
-            rotatingA = false;
-            rotatingD = true;
-           
-        }
-        else
-        {
-            rotatingA = false;
-            rotatingD = false;
-        }
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                audio.Play();
+                rotatingA = true;
+            }
+            if (Input.GetKey(KeyCode.A) && rotatingA)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.Play();
+                }
+                joystick.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+                cube.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                rotatingD = true;
+                audio.Play();
 
-        // 根据按键状态执行操作
-        if (rotatingA)
-        {
-            audio.Play();
-            joystick.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-            cube.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D) && rotatingD)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.Play();
+                }
+                joystick.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
+                cube.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                audio.Stop();
+                rotatingA = false;
+                rotatingD = false;
+            }
         }
-        else if (rotatingD)
-        {
-            audio.Play();
-            joystick.Rotate(Vector3.back, rotationSpeed * Time.deltaTime);
-            cube.Rotate(Vector3.forward, rotationSpeed * Time.deltaTime);
-        }
-        else
-        {
-           audio.Stop();
-        }
+       
     }
 }
