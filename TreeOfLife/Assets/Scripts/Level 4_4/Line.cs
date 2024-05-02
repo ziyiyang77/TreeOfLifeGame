@@ -72,6 +72,12 @@ public class Line : MonoBehaviour
             return true;
         }
 
+        Line line = obj as Line;
+        if (line != null)
+        {
+            return line.hasPower;
+        }
+
         // Return false if no conditions are met
         return false;
     }
