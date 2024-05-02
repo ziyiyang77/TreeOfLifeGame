@@ -27,6 +27,10 @@ public class ElectricityPuzzleManager : MonoBehaviour
     private bool allowUpdates = true;  // Control flag for updates
     private bool inputEnabled = true;
 
+    //Related Game Objects
+    public GameObject fire;
+    public GameObject thermometer;
+
 
     private void Start()
     {
@@ -144,19 +148,49 @@ public class ElectricityPuzzleManager : MonoBehaviour
     IEnumerator SolvePuzzle()
     {
         inputEnabled = false; // Disable input to prevent changes during the solve sequence
+
         yield return new WaitForSeconds(2); // Wait for 2 seconds before proceeding
 
-        //puzzleSolvedSound.Play(); // Play the sound effect for puzzle solved
-
-        // Future actions such as opening a door or updating game state
-        // OpenDoor(); // Placeholder for future method calls
-        // UpdateGameState(); // Placeholder for other game state updates
-
-        //yield return new WaitForSeconds(puzzleSolvedSound.clip.length); // Wait for the sound to finish playing
+        puzzleSolvedSound.Play(); // Play the sound effect for puzzle solved
+                                  //yield return new WaitForSeconds(puzzleSolvedSound.clip.length); // Wait for the sound to finish playing
 
         DeactivatePuzzle();
         inputEnabled = true; // Re-enable input after deactivating the puzzle
+
+
+        // Initialize fire and thermometer
+        fire.SetActive(true);
+        Light fireLight = fire.GetComponent<Light>();
+        fireLight.intensity = 0; // Start with the fire light off
+
+        thermometer.SetActive(true);
+        Transform thermometerTransform = thermometer.transform;
+        Vector3 scale = thermometerTransform.localScale;
+        scale.y = 0; // Start with the thermometer at minimum scale
+        thermometerTransform.localScale = scale;
+
+        float duration = 3.0f; // Duration over which the fire and thermometer transition occurs
+        float time = 0;
+
+        while (time < duration)
+        {
+            time += Time.deltaTime; // Increment the time
+
+            // Gradually increase the fire intensity
+            fireLight.intensity = Mathf.Lerp(0, 300, time / duration);
+
+            // Gradually increase the thermometer's Y scale
+            scale.y = Mathf.Lerp(0, 1.7f, time / duration);
+            thermometerTransform.localScale = scale;
+
+            yield return null; // Wait for a frame before continuing
+        }
+
+        DoorController.Instance.OpenDoor();
+
+
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
