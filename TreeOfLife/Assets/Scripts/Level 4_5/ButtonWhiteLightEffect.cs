@@ -6,12 +6,13 @@ public class ButtonWhiteLightEffect : MonoBehaviour
 {
     public Image whiteLightPlane; // 全屏白光效果的平面对象
     public Material whiteLightMaterial; // 白光效果的材质
-    public float fadeInTime = 0.5f; // 渐变到全白的时间
+    public float fadeInTime = 2f; // 渐变到全白的时间
     public float fadeOutTime = 0.5f; // 渐变回正常的时间
 
     private bool isAnimating = false;
     public Image paperImage;
     public GameObject gemstone;
+    public Button gembutton;
 
     void Start()
     {
@@ -21,20 +22,22 @@ public class ButtonWhiteLightEffect : MonoBehaviour
 
     public void OnButtonClick()
     {
+        gembutton.gameObject.SetActive(false);
+        gemstone.SetActive(true);
+
         if (!isAnimating)
         {
             isAnimating = true;
             whiteLightPlane.gameObject.SetActive(true);
             StartCoroutine(FadeInOut());
         }
-        paperImage.gameObject.SetActive(false);
-        gemstone.SetActive(true);
-       // audio.clip = paper_close;
-       // audio.Play();
+      
     }
 
+    
     IEnumerator FadeInOut()
     {
+        yield return new WaitForSeconds(3.0f);
         // 渐变到全白
         float elapsedTime = 0f;
         while (elapsedTime < fadeInTime)
@@ -61,5 +64,7 @@ public class ButtonWhiteLightEffect : MonoBehaviour
 
         whiteLightPlane.gameObject.SetActive(false);
         isAnimating = false;
+
+        paperImage.gameObject.SetActive(false);
     }
 }
