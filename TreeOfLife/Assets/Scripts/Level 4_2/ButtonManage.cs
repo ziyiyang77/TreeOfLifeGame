@@ -52,6 +52,7 @@ public class ButtonManage : MonoBehaviour
     public void final()
     {
         paperImage.gameObject.SetActive(false);
-        gemstone.SetActive(true);
+        if (gemstone != null)
+            gemstone.SetActive(true);
     }
 }
