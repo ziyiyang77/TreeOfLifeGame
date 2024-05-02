@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
     public SpriteRenderer sr;
     private Animator animator; // Reference to the Animator component
+    private PlayerSound playerSound; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponentInChildren<Animator>();
+        playerSound = GetComponentInChildren<PlayerSound>();
     }
 
     void Update()
@@ -56,6 +58,11 @@ public class PlayerController : MonoBehaviour
         float y = Input.GetAxis("Vertical");
         Vector3 moveDir = new Vector3(x, 0, y);
         rb.velocity = moveDir * speed;
+
+        if(x != 0)
+        {
+            playerSound.PlayFootstep();
+        }
 
         // Update walking animation state
         animator.SetBool("isWalking", moveDir.magnitude > 0 && speed > 0);
