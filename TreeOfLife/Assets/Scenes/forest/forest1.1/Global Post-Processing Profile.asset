@@ -15,10 +15,10 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {r: 0.3878244, g: 0.36934853, b: 0.4716981, a: 1}
+    m_Value: {r: 0.36862746, g: 0.37895975, b: 0.47058824, a: 1}
   highlights:
     m_OverrideState: 1
-    m_Value: {r: 0.51458675, g: 0.51308656, b: 0.5924529, a: 1}
+    m_Value: {r: 0.5137255, g: 0.54700494, b: 0.5921569, a: 1}
   balance:
     m_OverrideState: 1
     m_Value: 0
@@ -34,15 +34,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfbdbb87d3286943a057f7791b43141, type: 3}
   m_Name: ChannelMixer
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   redOutRedIn:
     m_OverrideState: 0
     m_Value: 100
   redOutGreenIn:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: -6
   redOutBlueIn:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   greenOutRedIn:
     m_OverrideState: 0
@@ -430,7 +430,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 0.6999999, g: 0.7609781, b: 1, a: 1}
+    m_Value: {r: 0.42299035, g: 0.49740943, b: 0.78113204, a: 1}
   highQualityFiltering:
     m_OverrideState: 1
     m_Value: 1
