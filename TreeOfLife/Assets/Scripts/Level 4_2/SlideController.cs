@@ -17,7 +17,10 @@ public class SlideController : MonoBehaviour
     private float laststickz;
 
     public GameObject back;
-    AudioSource audio;
+    private AudioSource audio;
+    public AudioClip down;
+    public AudioClip hold;
+    public AudioClip up;
     private void Start()
     {
         audio = GetComponent<AudioSource>();
@@ -40,44 +43,60 @@ public class SlideController : MonoBehaviour
 
     void Update()
     {
-        if (back.activeSelf&& Input.GetKey(KeyCode.A))
+        if (back.activeSelf)
         {
-            rotatingA = true;
-            rotatingD = false;
-        }
-        else if (back.activeSelf && Input.GetKey(KeyCode.D))
-        {
-            rotatingA = false;
-            rotatingD = true;
-        }
-        else
-        {
-            rotatingA = false;
-            rotatingD = false;
-        }
-        //长按
-        if (rotatingD)
-        {
-            stickz -= Time.deltaTime * rotationSpeed;
-            audio.Play();
-        }
-        else if (rotatingA)
-        {
-            stickz += Time.deltaTime * rotationSpeed;
-            audio.Play();
-        }
-        stickz = ClampAngle(stickz, minAngle, maxAngle);
-        Quaternion quaternion = Quaternion.Euler(0,0,stickz);
-        joystick.localRotation = quaternion;
-       
-        //设置联动
-        if (stickz != laststickz)
-        {
-            if(rotatingD)
-              slider.Translate(Vector3.right * slideSpeed * Time.deltaTime);
-            else slider.Translate(Vector3.left * slideSpeed * Time.deltaTime);
-            laststickz = stickz;
-        }
-        
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                audio.clip = down;
+                audio.Play(); 
+                rotatingA = true;
+            }
+            if (Input.GetKey(KeyCode.A) && rotatingA)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.clip = hold;
+                    audio.Play();
+                   
+                }
+                stickz += Time.deltaTime * rotationSpeed;
+            }
+            if (Input.GetKeyDown(KeyCode.D))
+            {
+                rotatingD = true;
+                audio.clip = down;
+                audio.Play();
+
+            }
+            if (Input.GetKey(KeyCode.D) && rotatingD)
+            {
+                if (!audio.isPlaying)
+                {
+                    audio.clip = hold;
+                    audio.Play();
+
+                }
+                stickz -= Time.deltaTime * rotationSpeed;
+            }
+            stickz = ClampAngle(stickz, minAngle, maxAngle);
+            Quaternion quaternion = Quaternion.Euler(0, 0, stickz);
+            joystick.localRotation = quaternion;
+
+            //设置联动
+            if (stickz != laststickz)
+            {
+                if (rotatingD)
+                    slider.Translate(Vector3.right * slideSpeed * Time.deltaTime);
+                else slider.Translate(Vector3.left * slideSpeed * Time.deltaTime);
+                laststickz = stickz;
+            }
+            if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+            {
+                audio.clip = up;
+                audio.Play();
+                rotatingA = false;
+                rotatingD = false;
+            }
+        }  
     }
 }

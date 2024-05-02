@@ -6,53 +6,108 @@ using UnityEngine.UI;
 
 public class ButtonManage : MonoBehaviour
 {
-    // 指定文本组件
-    public TextMeshProUGUI buttonText1;
-    public TextMeshProUGUI buttonText2;
-    public Button right2;
+    public Button leftButton;
+    public Button rightButton;
     public Button finalButton;
     public Image paperImage;
     public GameObject gemstone;
+    public Image logo;
+    public Image Imagestone;//宝石
+    public TextMeshProUGUI[] texts; // 存储所有的Text组件
+    private int currentIndex = 0; // 当前显示的Text索引
 
-    // 当前状态：是否显示文本
-    private bool isTextShown = false;
-    private bool isfirstopen = true;
 
     void Start()
     {
-        buttonText2.enabled = false;
+        /*buttonText2.enabled = false;
         right2.enabled = false;
         right2.gameObject.SetActive(false);
-        finalButton.gameObject.SetActive(false);
+        finalButton.gameObject.SetActive(false);*/
         gemstone.SetActive(false);
+        Imagestone.gameObject.SetActive(false);
+        logo.gameObject.SetActive(false);
+        rightButton.gameObject.SetActive(false);
+        leftButton.gameObject.SetActive(true);
+        finalButton.gameObject.SetActive(false);
+        for (int i=1;i<texts.Length;i++)
+        {
+            HideText(i);
+        }
     }
     void Update()
     {
-       if(PaperSpreadScript.Isread && isfirstopen)
+      /* if(PaperSpreadScript.Isread && isfirstopen)
         {
             buttonText1.enabled = true;
             isfirstopen = false;
-        }     
+        }   */  
+
+    }
+    // 按下左箭头按钮时调用
+    public void ShowNextText()
+    {
+       
+            HideText(currentIndex);
+            currentIndex = (currentIndex + 1) % texts.Length;
+            if (currentIndex == 1)
+                logo.gameObject.SetActive(true);
+            else logo.gameObject.SetActive(false);
+            ShowText(currentIndex);
+            UpdateButtonState();
 
     }
 
-    public void ToggleText1()
+    // 按下右箭头按钮时调用
+    public void ShowPreviousText()
     {
-        buttonText1.enabled = true;
-        buttonText2.enabled = false;
+      
+        HideText(currentIndex);
+        currentIndex = (currentIndex - 1 + texts.Length) % texts.Length;
+        ShowText(currentIndex);
+        UpdateButtonState();
     }
-    public void ToggleText2()
+
+    private void ShowText(int index)
     {
-        buttonText1.enabled = false;
-        buttonText2.enabled = true;
-        right2.gameObject.SetActive(true);
-        right2.enabled = true;
-        finalButton.gameObject.SetActive(true);
+        texts[index].gameObject.SetActive(true);
+    }
+
+    private void HideText(int index)
+    {
+        texts[index].gameObject.SetActive(false);
+    }
+
+    private void UpdateButtonState()
+    {
+        // 如果是第一个text，则隐藏左箭头按钮
+        if (currentIndex == 0)
+        {
+            rightButton.gameObject.SetActive(false);
+        }
+        else
+        {
+            rightButton.gameObject.SetActive(true);
+        }
+
+        // 如果是最后一个text
+        if (currentIndex == texts.Length - 1)
+        {
+            leftButton.enabled = false;
+            Imagestone.gameObject.SetActive(true);
+            finalButton.gameObject.SetActive(true);
+        }
+        
     }
     public void final()
     {
+      
         paperImage.gameObject.SetActive(false);
+<<<<<<< Updated upstream
         if (gemstone != null)
             gemstone.SetActive(true);
+=======
+
+    //    gemstone.SetActive(true);
+>>>>>>> Stashed changes
     }
 }

@@ -25,15 +25,15 @@ public class Laser : MonoBehaviour
     private bool isopening = false;
     public Animator animator;
 
-    public AudioClip openSound;
-    private AudioSource audioSource;
+ //   public AudioClip openSound;
+//    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _mycam = Camera.main;
-        audioSource = GetComponent<AudioSource>();
+      //  audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -69,7 +69,7 @@ public class Laser : MonoBehaviour
                         Debug.Log("open!");
                         isopening = true;
                         animator.SetTrigger("close");
-                        audioSource.PlayOneShot(openSound);
+                    //    audioSource.PlayOneShot(openSound);
 
                     }
 
@@ -85,7 +85,7 @@ public class Laser : MonoBehaviour
                     Debug.Log("close!");
                     isopening = false;
                     animator.SetTrigger("open");
-                    audioSource.PlayOneShot(openSound);
+                //    audioSource.PlayOneShot(openSound);
 
                 }
                 doortrigger.SetActive(true);
