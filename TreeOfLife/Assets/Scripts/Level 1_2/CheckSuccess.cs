@@ -49,12 +49,12 @@ public class CheckSucess : MonoBehaviour
             // 检查小球是否在指定位置附近  
             if (Vector3.Distance(ballPosition, targetPosition) <= tolerance)
             {
-            //   Debug.Log( balls[i].name + " 在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+             Debug.Log( balls[i].name + " 在指定位置。");
                 count++;
             }
             else
             {
-             //  Debug.Log(balls[i].name + " 不在指定位置。"+ Vector3.Distance(ballPosition, targetPosition));
+              Debug.Log(balls[i].name + " 不在指定位置。");
                 count--;
             }
         }
