@@ -11,7 +11,7 @@ public class PaperSpreadScript : MonoBehaviour
     public static bool Isread=false;
     void Start()
     {
-     //   paperImage.SetActive(false);
+        paperImage.SetActive(false);
         cue.SetActive(false);
     }
     void OnTriggerEnter(Collider other)
@@ -39,7 +39,7 @@ public class PaperSpreadScript : MonoBehaviour
     {
        if(Isread&&Input.GetKeyDown(KeyCode.F))
         {
-          //  paperImage.SetActive(true);
+            paperImage.SetActive(true);
         }
     }
 
