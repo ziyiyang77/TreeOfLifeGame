@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,18 +9,21 @@ public class PaperSpreadScript : MonoBehaviour
     public GameObject paperImage; // 引用信纸UI元素  
     private bool isFullScreen = false; // 标记信纸是否铺满屏幕  
     public GameObject cue; //F
-    public static bool Isread=true;
+    public static bool Isread=false;
+
+
     void Start()
     {
         paperImage.SetActive(false);
         cue.SetActive(false);
+
     }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             cue.SetActive(true);
-          
+            Isread = true;
             Debug.Log("Enterletter");
         }
     }
@@ -29,6 +33,7 @@ public class PaperSpreadScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             cue.SetActive(false);
+            Isread = false;
             Debug.Log("Exitletter");
         }
     }
@@ -39,7 +44,7 @@ public class PaperSpreadScript : MonoBehaviour
         {
             paperImage.SetActive(true);
             Isread = false;
-
+           
         }
     }
 

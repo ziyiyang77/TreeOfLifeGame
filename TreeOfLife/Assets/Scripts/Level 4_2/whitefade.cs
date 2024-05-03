@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,7 @@ public class whitefade : MonoBehaviour
 
     public GameObject cue;//F;
     public Collider trigger;//阅读完之后不能再阅读
+    public static bool fadoutOver=false; //标志是否淡出结束
     void Start()
     {
         // 确保白光效果初始状态为不可见
@@ -88,5 +90,7 @@ public class whitefade : MonoBehaviour
         whiteLightPlane.gameObject.SetActive(false);
         cue.SetActive(false);
         trigger.enabled = false;
+        fadoutOver = true;
     }
+   
 }
