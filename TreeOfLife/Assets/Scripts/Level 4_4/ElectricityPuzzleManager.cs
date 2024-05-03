@@ -153,7 +153,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         return true;
     }
 
-    public IEnumerator SolvePuzzle()
+    private IEnumerator SolvePuzzle()
     {
         inputEnabled = false; // Disable input to prevent changes during the solve sequence
 
