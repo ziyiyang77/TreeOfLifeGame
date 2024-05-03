@@ -17,12 +17,22 @@ public class gemGlow : MonoBehaviour
     public Image whiteImage;
     void Start()
     {
+        StartCoroutine(BeginGlowAfterDelay(3.0f)); // Wait 3 seconds before starting glow
+    }
+
+    IEnumerator BeginGlowAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay); // Wait for 3 seconds
+
         materialProperties = new MaterialPropertyBlock();
         gemRenderer.GetPropertyBlock(materialProperties);
     }
 
     void Update()
     {
+        if (materialProperties == null)
+            return; // Skip the Update if the material properties are not set yet
+
         elapsedTime += Time.deltaTime;
         float progress = elapsedTime / glowDuration;
         float glowRadius = Mathf.Lerp(0, maxGlowRadius, progress);
