@@ -19,33 +19,21 @@ public class ButtonManage : MonoBehaviour
 
     void Start()
     {
-        /*buttonText2.enabled = false;
-        right2.enabled = false;
-        right2.gameObject.SetActive(false);
-        finalButton.gameObject.SetActive(false);*/
+        rightButton.gameObject.SetActive(true);
+        leftButton.gameObject.SetActive(false);
+        finalButton.gameObject.SetActive(false);
         if (gemstone != null && Imagestone != null && logo != null)
         {
             gemstone.SetActive(false);
             Imagestone.gameObject.SetActive(false);
             logo.gameObject.SetActive(false);
-        }
-        rightButton.gameObject.SetActive(false);
-        leftButton.gameObject.SetActive(true);
-        finalButton.gameObject.SetActive(false);
+        }      
         for (int i=1;i<texts.Length;i++)
         {
             HideText(i);
         }
     }
-    void Update()
-    {
-      /* if(PaperSpreadScript.Isread && isfirstopen)
-        {
-            buttonText1.enabled = true;
-            isfirstopen = false;
-        }   */  
-
-    }
+    
     // 按下左箭头按钮时调用
     public void ShowNextText()
     {
@@ -88,19 +76,20 @@ public class ButtonManage : MonoBehaviour
         // 如果是第一个text，则隐藏左箭头按钮
         if (currentIndex == 0)
         {
-            rightButton.gameObject.SetActive(false);
+            leftButton.gameObject.SetActive(false);
+            rightButton.gameObject.SetActive(true);
         }
         else
         {
-            rightButton.gameObject.SetActive(true);
+            leftButton.gameObject.SetActive(true);
         }
 
         // 如果是最后一个text
         if (currentIndex == texts.Length - 1)
         {
-            leftButton.enabled = false;
+            rightButton.enabled = false;
             if (Imagestone != null)
-            Imagestone.gameObject.SetActive(true);
+                Imagestone.gameObject.SetActive(true);
             finalButton.gameObject.SetActive(true);
         }
         

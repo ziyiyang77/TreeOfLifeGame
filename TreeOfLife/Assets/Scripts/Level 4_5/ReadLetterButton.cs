@@ -26,19 +26,15 @@ public class ReadLetterButton : MonoBehaviour
         gemstone.SetActive(false);
         gemButton.gameObject.SetActive(false);
         //    Imagestone.gameObject.SetActive(false);
-        rightButton.gameObject.SetActive(false);
-        leftButton.gameObject.SetActive(true);
+        rightButton.gameObject.SetActive(true);
+        leftButton.gameObject.SetActive(false);
         finalButton.gameObject.SetActive(false);
         for (int i = 1; i < texts.Length; i++)
         {
             HideText(i);
         }
     }
-    void Update()
-    {
-        
-
-    }
+    
     // 按下左箭头按钮时调用
     public void ShowNextText()
     {
@@ -76,28 +72,28 @@ public class ReadLetterButton : MonoBehaviour
 
     private void UpdateButtonState()
     {
-        // 如果是第一个text，则隐藏右箭头按钮
+        // 如果是第一个text，则隐藏左箭头按钮
         if (currentIndex == 0)
         {
-            rightButton.gameObject.SetActive(false);
-            leftButton.gameObject.SetActive(true);
+            rightButton.gameObject.SetActive(true);
+            leftButton.gameObject.SetActive(false);
         }
         else
         {
-            rightButton.gameObject.SetActive(true);
+            leftButton.gameObject.SetActive(true);
         }
 
         // 如果是最后一个text
         if (currentIndex == texts.Length - 1)
         {
-            leftButton.enabled = false;
+            rightButton.enabled = false;
             gemButton.gameObject.SetActive(true);
             //  Imagestone.gameObject.SetActive(true);
             finalButton.gameObject.SetActive(true);
         }
         else
         {
-            leftButton.enabled = true ;
+            rightButton.enabled = true ;
             gemButton.gameObject.SetActive(false);
         }
 
