@@ -16,9 +16,14 @@ public class ButtonManage : MonoBehaviour
     public TextMeshProUGUI[] texts; // 存储所有的Text组件
     public int currentIndex = 0; // 当前显示的Text索引
 
+    private AudioSource audio;
+    public AudioClip paper;
+    public AudioClip paper_close;
 
     void Start()
     {
+        audio = GetComponent<AudioSource>();
+
         rightButton.gameObject.SetActive(true);
         leftButton.gameObject.SetActive(false);
         finalButton.gameObject.SetActive(false);
@@ -48,6 +53,8 @@ public class ButtonManage : MonoBehaviour
             }
             ShowText(currentIndex);
             UpdateButtonState();
+            audio.clip = paper;
+            audio.Play();
 
     }
 
@@ -59,6 +66,8 @@ public class ButtonManage : MonoBehaviour
         currentIndex = (currentIndex - 1 + texts.Length) % texts.Length;
         ShowText(currentIndex);
         UpdateButtonState();
+        audio.clip = paper;
+        audio.Play();
     }
 
     private void ShowText(int index)
@@ -89,17 +98,26 @@ public class ButtonManage : MonoBehaviour
         {
             rightButton.enabled = false;
             if (Imagestone != null)
+            {
                 Imagestone.gameObject.SetActive(true);
+            }
             finalButton.gameObject.SetActive(true);
         }
-        
+        else
+        {
+            if (Imagestone != null)
+                Imagestone.gameObject.SetActive(false);
+            rightButton.enabled = true;
+        }
+
+
     }
     public void final()
     {
-      
         paperImage.gameObject.SetActive(false);
         if (gemstone != null)
             gemstone.SetActive(true);
-
+        audio.clip = paper_close;
+        audio.Play();
     }
 }
