@@ -48,7 +48,7 @@ public class RotateLight : MonoBehaviour
                transform.position = newPosition;
             if(transform.name == "left"&& newPosition.x <= 1f)
                 transform.position = newPosition;
-            Debug.Log(transform.position);
+          //  Debug.Log(transform.position);
         }
     }
 
