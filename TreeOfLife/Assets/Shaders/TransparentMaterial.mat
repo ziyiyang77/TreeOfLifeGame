@@ -29,7 +29,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+<<<<<<< Updated upstream
     - _TransparencyRadius: 1
+=======
+    - _TransparencyRadius: 0.05
+>>>>>>> Stashed changes
     m_Colors:
     - _Color: {r: 0.9292453, g: 0.9426634, b: 1, a: 1}
   m_BuildTextureStacks: []

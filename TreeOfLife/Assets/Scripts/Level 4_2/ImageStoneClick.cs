@@ -7,16 +7,17 @@ using UnityEngine.UI;
 public class ImageStoneClick : MonoBehaviour, IPointerClickHandler
 {
    
-    public Image gemblue;
+    public GameObject gemblue;
+    public Image paper;
     void Start()
     {
-        gemblue.gameObject.SetActive(false);
+        gameObject.SetActive(false);
+        gemblue.SetActive(false);
     }
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log("Image±»µã»÷ÁË£¡");
-        gameObject.SetActive(false);
-        gemblue.gameObject.SetActive(true);
+        paper.gameObject.SetActive(false);
+        gemblue.SetActive(true);
 
     }
 }
