@@ -106,6 +106,17 @@ public class Line : MonoBehaviour
                 default: return false;
             }
         }
+        else if (node.wiringType == Node.WiringType.I)
+        {
+            switch (direction)
+            {
+                case "up": return node.currentRotation == 90 || node.currentRotation == 270;
+                case "down": return node.currentRotation == 90 || node.currentRotation == 270;
+                case "left": return node.currentRotation == 180 || node.currentRotation == 0;
+                case "right": return node.currentRotation == 0 || node.currentRotation == 180;
+                default: return false;
+            }
+        }
 
         return false;
     }

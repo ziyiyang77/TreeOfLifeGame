@@ -52,6 +52,7 @@ public class Checker : MonoBehaviour
         UpdateVisuals();
     }
 
+
     bool CheckIfPowered(Line line)
     {
         return line != null && line.hasPower;

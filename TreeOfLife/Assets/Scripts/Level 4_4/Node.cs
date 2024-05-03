@@ -4,7 +4,7 @@ using UnityEngine;
 public class Node : MonoBehaviour
 {
     // Enum to represent wiring types inside the node
-    public enum WiringType { L, T }
+    public enum WiringType { L, T, I}
     // Enum for different rotation types a node can have
     public enum RotationType { Arrow, Square, Triangle }
 
@@ -31,6 +31,8 @@ public class Node : MonoBehaviour
 
     private ElectricityPuzzleManager puzzleManager;
 
+    public int defaltRotation;
+
     private void Awake()
     {
         puzzleManager = FindObjectOfType<ElectricityPuzzleManager>();
@@ -40,7 +42,7 @@ public class Node : MonoBehaviour
     {
         // Initialize the node
         hasPower = false;
-        currentRotation = 0; // Initial rotation
+        //currentRotation = 0; // Initial rotation
     }
     public void AddNodeToPuzzle(Node node)
     {
@@ -92,6 +94,9 @@ public class Node : MonoBehaviour
             case WiringType.T:
                 CheckTPower();
                 break;
+            case WiringType.I:
+                CheckIPower();
+                break;
         }
 
         if (hasPower) { AddNodeToPuzzle(this); }
@@ -122,6 +127,19 @@ public class Node : MonoBehaviour
         else if (currentRotation == 180 && (CheckPower(downObject) || CheckPower(leftObject) || CheckPower(rightObject)))
             hasPower = true;
         else if (currentRotation == 270 && (CheckPower(upObject) || CheckPower(rightObject) || CheckPower(downObject)))
+            hasPower = true;
+    }
+
+    void CheckIPower()
+    {
+        // Check connections based on I-shape and current rotation
+        if (currentRotation == 0 && (CheckPower(rightObject) || CheckPower(leftObject)))
+            hasPower = true;
+        else if (currentRotation == 90 && (CheckPower(upObject) || CheckPower(downObject)))
+            hasPower = true;
+        else if (currentRotation == 180 && (CheckPower(leftObject) || CheckPower(rightObject)))
+            hasPower = true;
+        else if (currentRotation == 270 && (CheckPower(downObject) || CheckPower(upObject)))
             hasPower = true;
     }
 

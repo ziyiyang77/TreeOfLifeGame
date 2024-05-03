@@ -14,7 +14,7 @@ public class ButtonManage : MonoBehaviour
     public Image logo;
     public Image Imagestone;//宝石
     public TextMeshProUGUI[] texts; // 存储所有的Text组件
-    private int currentIndex = 0; // 当前显示的Text索引
+    public int currentIndex = 0; // 当前显示的Text索引
 
 
     void Start()
@@ -23,9 +23,12 @@ public class ButtonManage : MonoBehaviour
         right2.enabled = false;
         right2.gameObject.SetActive(false);
         finalButton.gameObject.SetActive(false);*/
-        gemstone.SetActive(false);
-        Imagestone.gameObject.SetActive(false);
-        logo.gameObject.SetActive(false);
+        if (gemstone != null && Imagestone != null && logo != null)
+        {
+            gemstone.SetActive(false);
+            Imagestone.gameObject.SetActive(false);
+            logo.gameObject.SetActive(false);
+        }
         rightButton.gameObject.SetActive(false);
         leftButton.gameObject.SetActive(true);
         finalButton.gameObject.SetActive(false);
@@ -49,9 +52,12 @@ public class ButtonManage : MonoBehaviour
        
             HideText(currentIndex);
             currentIndex = (currentIndex + 1) % texts.Length;
-            if (currentIndex == 1)
-                logo.gameObject.SetActive(true);
-            else logo.gameObject.SetActive(false);
+            if (logo != null)
+            {            
+                if (currentIndex == 1)
+                    logo.gameObject.SetActive(true);
+                else logo.gameObject.SetActive(false);
+            }
             ShowText(currentIndex);
             UpdateButtonState();
 
@@ -93,6 +99,7 @@ public class ButtonManage : MonoBehaviour
         if (currentIndex == texts.Length - 1)
         {
             leftButton.enabled = false;
+            if (Imagestone != null)
             Imagestone.gameObject.SetActive(true);
             finalButton.gameObject.SetActive(true);
         }

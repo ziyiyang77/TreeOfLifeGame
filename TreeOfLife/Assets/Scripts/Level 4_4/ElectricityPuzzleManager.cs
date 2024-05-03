@@ -25,17 +25,21 @@ public class ElectricityPuzzleManager : MonoBehaviour
     public Color selectedColor = Color.red;
 
     private bool allowUpdates = true;  // Control flag for updates
-    private bool inputEnabled = true;
+    public bool inputEnabled = true;
 
     //Related Game Objects
     public GameObject fire;
     public GameObject thermometer;
 
+    public bool isSolved = false;
+    public bool isLastPuzzles = false;
+
+    public GameObject indicators;
 
     private void Start()
     {
-        puzzleCamera.gameObject.SetActive(false); // Start with the puzzle camera deactivated
-        puzzle.SetActive(false); // Start with the puzzle itself deactivated
+        //puzzleCamera.gameObject.SetActive(false); // Start with the puzzle camera deactivated
+        //puzzle.SetActive(false); // Start with the puzzle itself deactivated
     }
 
     void Update()
@@ -54,7 +58,11 @@ public class ElectricityPuzzleManager : MonoBehaviour
         }
         if (puzzle.activeSelf && CheckAllConditionsMet())
         {
-            StartCoroutine(SolvePuzzle());
+            isSolved = true;
+            if (isLastPuzzles)
+            {
+                StartCoroutine(SolvePuzzle());
+            }
         }
     }
 
@@ -117,8 +125,8 @@ public class ElectricityPuzzleManager : MonoBehaviour
 
         foreach (var node in nodes)
         {
-            node.transform.rotation = Quaternion.Euler(0, 0, 0);
-            node.currentRotation = 0;
+            node.transform.rotation = Quaternion.Euler(0, 0, node.defaltRotation);
+            node.currentRotation = node.defaltRotation;
             node.ClearPowerData();
         }
 
@@ -145,7 +153,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         return true;
     }
 
-    IEnumerator SolvePuzzle()
+    public IEnumerator SolvePuzzle()
     {
         inputEnabled = false; // Disable input to prevent changes during the solve sequence
 
@@ -229,6 +237,8 @@ public class ElectricityPuzzleManager : MonoBehaviour
             playerController.StopMovementAndAnimation();
             playerController.enabled = false;
 
+            indicators.SetActive(true);
+
             UpdateButtonColors(); // Initial update to button colors
             UpdateAll();
         }
@@ -242,6 +252,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
     {
         puzzleCamera.gameObject.SetActive(false);
         puzzle.SetActive(false);
+        indicators.SetActive(false);
 
         playerController.enabled = true;
     }
