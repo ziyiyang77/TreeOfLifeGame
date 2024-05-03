@@ -20,7 +20,7 @@ public class ButtonWhiteLightEffect : MonoBehaviour
         if (gemGlow.isfinal)
         {
             whiteLightPlane.gameObject.SetActive(true);
-            StartCoroutine(FadeInOut());
+            StartCoroutine(GraduallyIncreaseRadius());
         }
 
     }
@@ -53,5 +53,23 @@ public class ButtonWhiteLightEffect : MonoBehaviour
         whiteLightPlane.gameObject.SetActive(false);
 
        
+    }
+
+    IEnumerator GraduallyIncreaseRadius()
+    {
+        float elapsedTime = 0f;
+        float initialRadius = 0.05f;
+        float targetRadius = 1f;
+
+        while (elapsedTime < fadeInTime)
+        {
+            float newRadius = Mathf.Lerp(initialRadius, targetRadius, elapsedTime / fadeInTime);
+            whiteLightMaterial.SetFloat("_TransparencyRadius", newRadius);
+            elapsedTime += Time.deltaTime;
+            yield return null; // Wait until the next frame
+        }
+
+        // Ensure the final value is set exactly to the target
+        whiteLightMaterial.SetFloat("_TransparencyRadius", targetRadius);
     }
 }
