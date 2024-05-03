@@ -31,7 +31,14 @@ public class gemGlow : MonoBehaviour
     void Update()
     {
         if (materialProperties == null)
+        {
+            Debug.Log("no material");
             return; // Skip the Update if the material properties are not set yet
+        }
+        else
+        {
+            Debug.Log("have material");
+        }  
 
         elapsedTime += Time.deltaTime;
         float progress = elapsedTime / glowDuration;
@@ -44,6 +51,7 @@ public class gemGlow : MonoBehaviour
 
         if (elapsedTime >= glowDuration)
         {
+            Debug.Log("baiguang ");
             isfinal = true;
             enabled = false; // Optionally stop further updates
             gameObject.SetActive(false);

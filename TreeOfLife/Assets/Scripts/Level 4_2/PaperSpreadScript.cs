@@ -8,7 +8,7 @@ public class PaperSpreadScript : MonoBehaviour
     public GameObject paperImage; // 引用信纸UI元素  
     private bool isFullScreen = false; // 标记信纸是否铺满屏幕  
     public GameObject cue; //F
-    public static bool Isread=false;
+    public static bool Isread=true;
     void Start()
     {
         paperImage.SetActive(false);
@@ -18,7 +18,6 @@ public class PaperSpreadScript : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Isread = true;
             cue.SetActive(true);
           
             Debug.Log("Enterletter");
@@ -30,7 +29,6 @@ public class PaperSpreadScript : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             cue.SetActive(false);
-            Isread = false;
             Debug.Log("Exitletter");
         }
     }
@@ -40,6 +38,8 @@ public class PaperSpreadScript : MonoBehaviour
        if(Isread&&Input.GetKeyDown(KeyCode.F))
         {
             paperImage.SetActive(true);
+            Isread = false;
+
         }
     }
 

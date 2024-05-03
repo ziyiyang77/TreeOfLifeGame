@@ -1,15 +1,17 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//此脚本是全屏白的效果
-public class ButtonWhiteLightEffect : MonoBehaviour
+public class whitefade : MonoBehaviour
 {
     public Image whiteLightPlane; // 全屏白光效果的平面对象
     public Material whiteLightMaterial; // 白光效果的材质
     public float fadeInTime = 2f; // 渐变到全白的时间
     public float fadeOutTime = 0.5f; // 渐变回正常的时间
 
+    public GameObject cue;//F;
+    public Collider trigger;//阅读完之后不能再阅读
     void Start()
     {
         // 确保白光效果初始状态为不可见
@@ -53,7 +55,7 @@ public class ButtonWhiteLightEffect : MonoBehaviour
         }
         whiteLightPlane.gameObject.SetActive(false);
 
-       
+
     }
 
     IEnumerator GraduallyIncreaseRadius()
@@ -72,5 +74,19 @@ public class ButtonWhiteLightEffect : MonoBehaviour
 
         // Ensure the final value is set exactly to the target
         whiteLightMaterial.SetFloat("_TransparencyRadius", targetRadius);
+
+        elapsedTime = 0f;
+        while (elapsedTime < fadeOutTime)
+        {
+            Debug.Log("fadeout");
+            float newRadius = Mathf.Lerp(targetRadius, initialRadius, elapsedTime / fadeOutTime);
+            whiteLightMaterial.SetFloat("_TransparencyRadius", newRadius);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        whiteLightMaterial.SetFloat("_TransparencyRadius", initialRadius);
+        whiteLightPlane.gameObject.SetActive(false);
+        cue.SetActive(false);
+        trigger.enabled = false;
     }
 }
