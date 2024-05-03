@@ -15,7 +15,7 @@ public class MusicManager : MonoBehaviour
         {
             StopMusic();  // Stop the music if it is MainScene
         }
-        else
+        else 
         {
             // Optionally, restart or change music for other scenes
         }
