@@ -86,14 +86,14 @@ public class ReadLetterButton : MonoBehaviour
         // 如果是最后一个text
         if (currentIndex == texts.Length - 1)
         {
-            rightButton.enabled = false;
+            rightButton.gameObject.SetActive(false);
             gemButton.gameObject.SetActive(true);
             //  Imagestone.gameObject.SetActive(true);
             finalButton.gameObject.SetActive(true);
         }
         else
         {
-            rightButton.enabled = true ;
+            rightButton.gameObject.SetActive(true);
             gemButton.gameObject.SetActive(false);
         }
 

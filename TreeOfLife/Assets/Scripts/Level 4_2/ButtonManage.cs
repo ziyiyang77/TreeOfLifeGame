@@ -96,7 +96,7 @@ public class ButtonManage : MonoBehaviour
         // 如果是最后一个text
         if (currentIndex == texts.Length - 1)
         {
-            rightButton.enabled = false;
+            rightButton.gameObject.SetActive(false);
             if (Imagestone != null)
             {
                 Imagestone.gameObject.SetActive(true);
@@ -107,7 +107,7 @@ public class ButtonManage : MonoBehaviour
         {
             if (Imagestone != null)
                 Imagestone.gameObject.SetActive(false);
-            rightButton.enabled = true;
+            rightButton.gameObject.SetActive(true);
         }
 
 
