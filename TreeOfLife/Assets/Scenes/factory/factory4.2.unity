@@ -2680,7 +2680,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whiteLightPlane: {fileID: 613559996}
-  whiteLightMaterial: {fileID: 2100000, guid: 6cfdaf597ba81084da2ebeb7c7601c1f, type: 2}
+  whiteLightMaterial: {fileID: 2100000, guid: 8ea711ab65fab7b4fb2bc54a9b357310, type: 2}
   fadeInTime: 2
   fadeOutTime: 2
   cue: {fileID: 1718662069}
