@@ -9,7 +9,7 @@ public class NoteMovement : MonoBehaviour
     void Start()
     {
         float randomYOffset = Random.Range(-2f, 2f);
-        startPosition = new Vector3(transform.position.x, transform.position.y + randomYOffset, transform.position.z);
+        startPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         transform.position = startPosition;
 
         oscillationMagnitude = Random.Range(0.5f, 2f);
@@ -22,6 +22,6 @@ public class NoteMovement : MonoBehaviour
 
         // Oscillate up and down
         float newY = Mathf.Sin(Time.time * moveSpeed) * oscillationMagnitude;
-        transform.position = new Vector3(transform.position.x, startPosition.y + newY, transform.position.z);
+        transform.position = new Vector3(transform.position.x, startPosition.y, transform.position.z);
     }
 }

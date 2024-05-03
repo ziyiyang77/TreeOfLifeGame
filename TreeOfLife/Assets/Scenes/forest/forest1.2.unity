@@ -6980,7 +6980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be74f67ab50079846bc217862ac79528, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 1666509912}
   topBlackSprite: {fileID: 73715642}
   bottomBlackSprite: {fileID: 1500669996}
   crawSingerScript: {fileID: 1340770646}
@@ -12227,8 +12227,8 @@ MonoBehaviour:
   m_StreamingVersion: 20170927
   m_Priority: 10
   m_StandbyUpdate: 2
-  m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 0}
+  m_LookAt: {fileID: 1666509909}
+  m_Follow: {fileID: 1666509909}
   m_Lens:
     FieldOfView: 45
     OrthographicSize: 5
@@ -14036,6 +14036,22 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d0d27b65bff5d64d8c4ab3d857b7735, type: 3}
   m_PrefabInstance: {fileID: 1657861139}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1666509909 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6625737002546496920, guid: 25106347bdd71b24f88c02d94fd452f5, type: 3}
+  m_PrefabInstance: {fileID: 1636582572}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1666509912 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3471693196269470558, guid: 25106347bdd71b24f88c02d94fd452f5, type: 3}
+  m_PrefabInstance: {fileID: 1636582572}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f499810b2760eb849b62e4d92c07a1f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1671149601
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18179,7 +18195,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6964d7d024067094fa7cef557505e32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nextSceneName: forest1.3
+  nextSceneName: forest1.3 1
 --- !u!65 &2101694987
 BoxCollider:
   m_ObjectHideFlags: 0
