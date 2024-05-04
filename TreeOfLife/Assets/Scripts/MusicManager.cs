@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;  // Required for handling scene changes
 
 public class MusicManager : MonoBehaviour
 {
+    public AudioClip factoryBGM;
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);  // Keep this object across scenes
@@ -14,6 +16,14 @@ public class MusicManager : MonoBehaviour
         if (scene.name == "MainScene")  // Check if the loaded scene is MainScene
         {
             StopMusic();  // Stop the music if it is MainScene
+        }
+        else if (scene.name == "factory4.1")
+        {
+            AudioSource audioSource = GetComponent<AudioSource>();
+            audioSource.clip = factoryBGM;
+            audioSource.loop = true;
+            audioSource.volume = 0.8f;
+            audioSource.Play();
         }
         else 
         {
