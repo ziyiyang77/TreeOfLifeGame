@@ -74,12 +74,13 @@ public class ButtonWhiteLightEffect : MonoBehaviour
         }
         // Ensure the final value is set exactly to the target
         whiteLightMaterial.SetFloat("_TransparencyRadius", targetRadius);
-        text.gameObject.SetActive(true);
+       
         StartCoroutine(Loadscene("MainScene")); //展示完结束语后加载到主场景
     }
 
     IEnumerator Loadscene(string sceneName)
     {
+        text.gameObject.SetActive(true);
         yield return new WaitForSeconds(3);
         SceneManager.LoadSceneAsync(sceneName);
         Debug.Log("load scene success");
