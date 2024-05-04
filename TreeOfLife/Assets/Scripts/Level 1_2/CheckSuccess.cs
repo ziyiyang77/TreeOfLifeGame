@@ -70,16 +70,17 @@ public class CheckSucess : MonoBehaviour
                 StartCoroutine(Delay());
                 DoorController.Instance.OpenDoor();                
                 Block.SetActive(false);
+                cue.SetActive(false);
             }
            
         }
     }
      IEnumerator Delay()
       { 
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(7f);
        
         mainCamera.enabled = true;
         firstCamera.enabled = false;
-          Debug.Log("delay10s");
+          Debug.Log("delay5s");
       }
 }
