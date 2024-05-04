@@ -43,8 +43,7 @@ public class DoorController : MonoBehaviour
             StartCoroutine(OpenDoorRoutine());
         }
         Debug.Log("door switcher ");
-        SceneSwitcher.SetActive(true);
-        Block.SetActive(false);
+        
         DoorLight.SetActive(true);
     }
 
@@ -66,5 +65,8 @@ public class DoorController : MonoBehaviour
         leftPanel.transform.position = leftTarget;
         rightPanel.transform.position = rightTarget;
         isOpening = false;
+
+        SceneSwitcher.SetActive(true);
+        Block.SetActive(false);
     }
 }
