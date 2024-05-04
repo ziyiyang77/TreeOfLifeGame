@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;  // Include this to work with UI elements
 
@@ -35,6 +36,10 @@ public class ElectricityPuzzleManager : MonoBehaviour
     public bool isLastPuzzles = false;
 
     public GameObject indicators;
+
+    public GameObject Cue;
+
+    public GameObject F_Hint;
 
     private void Start()
     {
@@ -205,6 +210,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsNearTrigger = true;
+            Cue.SetActive(true);
         }
     }
 
@@ -213,6 +219,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsNearTrigger = false;
+            Cue.SetActive(false);
         }
     }
 
@@ -233,6 +240,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         {
             puzzleCamera.gameObject.SetActive(true);
             puzzle.SetActive(true);
+            F_Hint.SetActive(true);
 
             playerController.StopMovementAndAnimation();
             playerController.enabled = false;
@@ -253,6 +261,7 @@ public class ElectricityPuzzleManager : MonoBehaviour
         puzzleCamera.gameObject.SetActive(false);
         puzzle.SetActive(false);
         indicators.SetActive(false);
+        F_Hint.SetActive(false);
 
         playerController.enabled = true;
     }
