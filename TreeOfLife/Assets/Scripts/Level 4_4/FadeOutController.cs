@@ -7,27 +7,24 @@ using UnityEngine.SceneManagement;
 public class FadeOutController : MonoBehaviour
 {
     public Animator animator;
-    public GameObject block;
     public string sceneName;
-    
-    void Update()
+
+    void OnTriggerEnter(Collider other)
     {
-        if (block.activeInHierarchy==false)
-        {
-            Debug.Log("block ");
+        if (other.CompareTag("Player"))
+        {           
             StartCoroutine(Loadscene(sceneName));
+           
         }
-        else
-        {
-            Debug.Log("no  ");
-        }
-        
     }
+
     IEnumerator Loadscene(string sceneName)
     {
         animator.SetBool("fadeout", true);
-        animator.SetBool("fadein", false);
+     //   animator.SetBool("fadein", false);
+        Debug.Log("fadeout");
         yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(sceneName);
+        Debug.Log("load scene success");
     }
 }
