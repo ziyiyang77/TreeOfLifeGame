@@ -13,8 +13,8 @@ public class CameraSwitcher : MonoBehaviour
     void Start()
     {
         mainCamera = Camera.main;
-        firstCamera.enabled = false; 
-
+        firstCamera.enabled = false;
+        cue.SetActive(true);
     }
 
     void OnTriggerEnter(Collider other)
@@ -37,7 +37,7 @@ public class CameraSwitcher : MonoBehaviour
 
     void Update()
     {
-        if (isInTriggerZone && Input.GetKeyDown(KeyCode.F))
+        if (CheckSucess.isfirstsuccess&&isInTriggerZone && Input.GetKeyDown(KeyCode.F))
         {
             cue.SetActive(false);
             firstCamera.enabled = true;
@@ -47,7 +47,7 @@ public class CameraSwitcher : MonoBehaviour
         if (mainCamera.enabled)
         {
             player.SetActive(true);
-            cue.SetActive(true);
+         //   cue.SetActive(true);
         }
         else
         {

@@ -6,8 +6,9 @@ using UnityEngine.SceneManagement;
 //当门开启后播放淡出的动画
 public class FadeOutController : MonoBehaviour
 {
-    public Animator animator;
+//    public Animator animator;
     public string sceneName;
+    public Animation animation;
 
     void OnTriggerEnter(Collider other)
     {
@@ -20,8 +21,8 @@ public class FadeOutController : MonoBehaviour
 
     IEnumerator Loadscene(string sceneName)
     {
-        animator.SetBool("fadeout", true);
-     //   animator.SetBool("fadein", false);
+        //  animator.SetBool("fadeout", true);
+        animation.Play("FadeOut");
         Debug.Log("fadeout");
         yield return new WaitForSeconds(1);
         SceneManager.LoadSceneAsync(sceneName);
