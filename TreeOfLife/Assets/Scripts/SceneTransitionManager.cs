@@ -38,7 +38,11 @@ public class SceneTransitionManager : MonoBehaviour
 
     public void LoadScene(string sceneName)
     {
-        if (sceneName == "forest1.1")
+        if (sceneName == "factory4.1" || sceneName == "factory4.2" || sceneName == "factory4.3"
+            || sceneName == "factory4.4" || sceneName == "factory4.5")
+        {
+        }
+        else if (sceneName == "forest1.1")
         {
             StartCoroutine(Transition(sceneName, blackFadePanel));
         }
