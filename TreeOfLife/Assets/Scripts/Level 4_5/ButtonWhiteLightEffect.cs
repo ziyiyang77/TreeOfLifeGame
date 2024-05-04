@@ -1,5 +1,7 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //此脚本是全屏白的效果
@@ -9,11 +11,12 @@ public class ButtonWhiteLightEffect : MonoBehaviour
     public Material whiteLightMaterial; // 白光效果的材质
     public float fadeInTime = 2f; // 渐变到全白的时间
     public float fadeOutTime = 0.5f; // 渐变回正常的时间
-
+    public TextMeshProUGUI text;//显示最后的结束语
     void Start()
     {
         // 确保白光效果初始状态为不可见
         whiteLightPlane.gameObject.SetActive(false);
+        text.gameObject.SetActive(false);
     }
     void Update()
     {
@@ -69,8 +72,16 @@ public class ButtonWhiteLightEffect : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null; // Wait until the next frame
         }
-
         // Ensure the final value is set exactly to the target
         whiteLightMaterial.SetFloat("_TransparencyRadius", targetRadius);
+        text.gameObject.SetActive(true);
+        StartCoroutine(Loadscene("MainScene")); //展示完结束语后加载到主场景
+    }
+
+    IEnumerator Loadscene(string sceneName)
+    {
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadSceneAsync(sceneName);
+        Debug.Log("load scene success");
     }
 }

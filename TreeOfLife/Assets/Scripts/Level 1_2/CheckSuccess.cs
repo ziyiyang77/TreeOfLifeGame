@@ -61,7 +61,7 @@ public class CheckSucess : MonoBehaviour
        // Debug.Log("count"+count);
         if (count== balls.Count)
         {
-            cue.SetActive(false);
+            //cue.SetActive(false);
 
             Debug.Log("sucess!");
             if (isfirstsuccess)
