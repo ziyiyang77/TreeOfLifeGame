@@ -12,7 +12,7 @@ public class AutoDoorControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerIsNearTrigger && !isOpening)
+        if (CardTrigger.isread&&playerIsNearTrigger && !isOpening)
         {
             isOpening = true;
             StartCoroutine(AutoDoorOpen());

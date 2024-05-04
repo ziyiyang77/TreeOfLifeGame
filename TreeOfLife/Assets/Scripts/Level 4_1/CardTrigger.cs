@@ -8,6 +8,7 @@ public class CardTrigger : MonoBehaviour
     public bool isInTriggerZone = false;
     public GameObject cue;
     public Image card;
+    public static bool isread = false;
     void OnTriggerEnter(Collider other)
     {        
         if (other.CompareTag("Player"))
@@ -43,6 +44,8 @@ public class CardTrigger : MonoBehaviour
         else if(isInTriggerZone && Input.GetKeyDown(KeyCode.Escape))
         {
             card.gameObject.SetActive(false);
+            isread = true;
+
         }
     }
 }
