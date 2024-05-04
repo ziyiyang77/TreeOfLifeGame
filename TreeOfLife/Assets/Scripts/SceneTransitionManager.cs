@@ -41,6 +41,7 @@ public class SceneTransitionManager : MonoBehaviour
         if (sceneName == "factory4.1" || sceneName == "factory4.2" || sceneName == "factory4.3"
             || sceneName == "factory4.4" || sceneName == "factory4.5")
         {
+            SceneManager.LoadScene(sceneName);
         }
         else if (sceneName == "forest1.1")
         {
