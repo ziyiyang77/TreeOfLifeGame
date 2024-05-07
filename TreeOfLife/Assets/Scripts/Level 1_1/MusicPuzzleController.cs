@@ -7,10 +7,9 @@ public class MusicPuzzleController : MonoBehaviour
     private List<int> currentMerrybellsOrder = new List<int>();
     private int currentPuzzleIndex = 0;
     public AudioSource wrongSoundSource;
-    public AudioSource bgmSource;           // AudioSource for the background music
-    public AudioClip merybellClip;      // AudioClip for the special music when all puzzles are completed
-    public AudioClip newBgmClip;            // AudioClip for the new background music
-
+    public AudioSource bgmSource;
+    public AudioClip merybellClip;
+    public AudioClip newBgmClip;
     private int[][] correctOrders = new int[][]
     {
         new int[] { 0, 4, 1 },
@@ -20,15 +19,20 @@ public class MusicPuzzleController : MonoBehaviour
     };
     public float lastInteractionTime = -1f;
     private CrawSinger crawSinger;
-    public List<Light> pointLights; // Reference to the point lights
+    public List<Light> pointLights;
     private Color Green;
-
+    public List<GameObject> merrybellHints; // List to hold hint objects
+    private int wrongTryCount = 0; // Counter for wrong attempts
 
     void Start()
     {
         crawSinger = FindObjectOfType<CrawSinger>();
         Green = pointLights[0].color;
         UpdatePointLights();
+        foreach (var hint in merrybellHints)
+        {
+            hint.SetActive(false); // Initially deactivate all hint objects
+        }
     }
 
     public void HandleMerrybellActivated(int activatedMerrybellId)
@@ -43,12 +47,10 @@ public class MusicPuzzleController : MonoBehaviour
         }
 
         currentMerrybellsOrder.Add(activatedMerrybellId);
-        Debug.Log("add " + activatedMerrybellId);
         CheckOrder();
 
         lastInteractionTime = Time.time;
     }
-
 
     void CheckOrder()
     {
@@ -58,18 +60,45 @@ public class MusicPuzzleController : MonoBehaviour
         {
             if (i >= currentCorrectOrder.Length || currentMerrybellsOrder[i] != currentCorrectOrder[i])
             {
-                wrongSoundSource.Play();
+                // wrongSoundSource.Play();
+                // wrongTryCount++; // Increment wrong try count
                 StartCoroutine(FlashLights());
                 ResetPuzzle();
+/*                if (wrongTryCount > 10)
+                {
+                    wrongTryCount = 0; // Reset wrong try count
+                    ShowHints(); // Start showing hints
+                }*/
                 return;
             }
         }
 
         if (currentMerrybellsOrder.Count == currentCorrectOrder.Length)
         {
+            // wrongTryCount = 0; // Reset on correct completion
             Debug.Log("Puzzle Solved!");
             AdvanceToNextPuzzle();
             UpdatePointLights();
+        }
+    }
+
+    void ShowHints()
+    {
+        StartCoroutine(ShowHintsCoroutine());
+    }
+
+    IEnumerator ShowHintsCoroutine()
+    {
+        for (int i = 0; i < correctOrders[currentPuzzleIndex].Length; i++)
+        {
+            merrybellHints[correctOrders[currentPuzzleIndex][i]].SetActive(true);
+            yield return new WaitForSeconds(2f); // Time between showing each hint
+        }
+        yield return new WaitForSeconds(3f);
+
+        for (int i = 0; i < correctOrders[currentPuzzleIndex].Length; i++)
+        {
+            merrybellHints[correctOrders[currentPuzzleIndex][i]].SetActive(false);
         }
     }
 
